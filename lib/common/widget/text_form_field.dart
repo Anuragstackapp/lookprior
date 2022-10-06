@@ -20,14 +20,14 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48,
+      height: 45,
       child: TextFormField(
         keyboardType: textInputType,
         controller: textEditingController,
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon:prefixIcon ,
-
+          contentPadding: EdgeInsets.only(top: 5.5),
 
           border: OutlineInputBorder(
             borderSide:
