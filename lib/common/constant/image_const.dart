@@ -12,5 +12,19 @@ class ImageResources{
   static const facbookIcon = '${images}facebook.svg';
   static const IconData facebook = IconData(0xf044, fontFamily: 'MaterialIcons');
   static const IconData apple = IconData(0xf04be, fontFamily: 'MaterialIcons');
+  static const alertTitleIcon = '${images}alertdilogicon.png';
+  static const firstPageIcon = '${images}firstpageicon.png';
+  static const notiFicationIcon = '${images}notifiction.svg';
+  static const drawerIcon = '${images}drawer.svg';
+  static const searchIcon = '${images}Search.svg';
+  static const menuIcon = '${images}menu.svg';
+  static const locationIcon = '${images}location.svg';
+  static const rectangleIcon = '${images}Rectangle.svg';
+  static const realStateIcon = '${images}hotel.svg';
+  static const vehicalsIcon = '${images}vechiles.svg';
+  static const mobileIcon = '${images}phone.svg';
+  static const catagoryIcon = '${images}Category.svg';
+
+
 
 }

@@ -10,10 +10,12 @@ class AppTextField extends StatelessWidget {
   final String? errorText;
   final FormFieldValidator? validator;
   final Border? border;
+  final Color? hintcolor;
 
   const AppTextField(
       {super.key,
         this.lable,
+        this.hintcolor,
         this.textInputType,
         this.prefixIcon,
         this.textEditingController,
@@ -35,7 +37,7 @@ class AppTextField extends StatelessWidget {
           hintStyle: GoogleFonts.poppins(
             fontSize: 15,
             fontWeight: FontWeight.w400,
-            color: Colors.grey,
+            color: hintcolor,
           ),
           hintText: hintText,
           prefixIcon:prefixIcon ,

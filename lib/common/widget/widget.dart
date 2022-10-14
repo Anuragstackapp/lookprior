@@ -33,7 +33,7 @@ Widget name() {
         ),
         hintText: 'Your Name',
         lable: 'Your Name',
-
+        hintcolor: Colors.grey,
       ),
     ),
   );
@@ -52,6 +52,7 @@ Widget email() {
         ),
         hintText: 'Email Address',
         lable: 'Email Address',
+        hintcolor: Colors.grey,
       ),
     ),
   );
@@ -82,6 +83,7 @@ Widget password() {
         ),
         hintText: 'Password',
         lable: 'Password',
+        hintcolor: Colors.grey,
       ),
     ),
   );
@@ -105,6 +107,7 @@ Widget conformPassword() {
         ),
         hintText: 'Confirm password',
         lable: 'Confirm password',
+        hintcolor: Colors.grey,
       ),
     ),
   );
