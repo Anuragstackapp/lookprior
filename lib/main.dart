@@ -32,11 +32,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus!.unfocus();
+      },
+      child: const MaterialApp(
 
-      home: SplashScreen(),
-      debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+        debugShowCheckedModeBanner: false,
 
+      ),
     );
   }
 }

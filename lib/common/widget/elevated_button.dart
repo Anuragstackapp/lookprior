@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommonElevatedButton extends StatelessWidget {
   final String? text;
@@ -19,33 +20,29 @@ class CommonElevatedButton extends StatelessWidget {
     this.width,
     this.margin,
     this.borderRadius = 9,
-    this.textSize = 20,
+    this.textSize = 16,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25,top: 30,right: 25),
-      child: Container(
-
-        width: width ?? double.infinity,
-        height: 44,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: Text(
-            text!,
-            style: TextStyle(
-              fontSize: textSize,
-              color: textColor,
-              fontWeight: FontWeight.bold,
-            ),
+    return Container(
+      width: width ?? double.infinity,
+      height: 44,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(
+          text!,
+          style: GoogleFonts.poppins(
+                fontSize: textSize,
+                color: textColor,
+                fontWeight: FontWeight.w500,
           ),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(buttonColor),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadius!),
-              ),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(buttonColor),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius!),
             ),
           ),
         ),

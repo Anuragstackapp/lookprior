@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomWidgets {
+  // final double? width;
+  //
+  // CustomWidgets({this.width});
   static Widget socialButtonRect(title, color, icon, {Function? onTap}) {
     return InkWell(
       onTap: () {
         onTap!();
       },
       child: Container(
-        height: 50,
-        margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        width: double.infinity,
+        height: 44,
+        // margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         decoration: BoxDecoration(
             color: color, borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Row(
@@ -20,12 +25,12 @@ class CustomWidgets {
               color: Colors.white,
             ),
             Container(
-              margin: EdgeInsets.only(left: 20),
+              margin: EdgeInsets.only(left: 15),
               child: Text(title,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500)),
             ),
           ],
         ),

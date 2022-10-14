@@ -7,10 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/common/widget/text_form_field.dart';
 import 'package:lookprior/common/widget/widget.dart';
 import 'package:lookprior/screens/register_screens/register_screens_view_model.dart';
+import 'package:lookprior/screens/register_screens/widget.dart';
 
 import '../../common/constant/color_const.dart';
 import '../../common/constant/image_const.dart';
 import '../../common/constant/string_const.dart';
+import '../../common/widget/elevated_button.dart';
 
 class RegisterScreens extends StatefulWidget {
   const RegisterScreens({Key? key}) : super(key: key);
@@ -22,15 +24,18 @@ class RegisterScreens extends StatefulWidget {
 class RegisterScreensState extends State<RegisterScreens> {
   Country _selectedDialogCountry =
       CountryPickerUtils.getCountryByPhoneCode('91');
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+
     RegisterPageViewModel? registerPageViewModel;
     registerPageViewModel =
         (registerPageViewModel ?? RegisterPageViewModel(this));
 
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      key: formKey,
       body: SafeArea(
           child: Container(
         height: size.height,
@@ -42,7 +47,7 @@ class RegisterScreensState extends State<RegisterScreens> {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 44),
-                  child: Image.asset(ImageResources.registerLogo),
+                  child:Image.asset(ImageResources.registerLogo),
                 )),
             Align(
               alignment: Alignment.topCenter,
@@ -78,7 +83,11 @@ class RegisterScreensState extends State<RegisterScreens> {
                         conteryCode(context),
                         password(),
                         conformPassword(),
-                        registerButton(),
+                        registerButton(context),
+                        divderrow(),
+                        facbookButton(),
+                        appleButton(),
+                        information(),
 
                         // conteryCode(context),
                       ],
@@ -93,6 +102,13 @@ class RegisterScreensState extends State<RegisterScreens> {
     );
   }
 
+  void submit() {
+    final isValid = formKey.currentState?.validate();
+    if (isValid!) {
+      isValid == true ? Text("Ok"): const Text("");
+    }
+    formKey.currentState?.save();
+  }
   conteryCode(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
@@ -116,9 +132,11 @@ class RegisterScreensState extends State<RegisterScreens> {
                       ),
 
                     ),
-                child: ListTile(
-                  onTap: _openCountryPickerDialog,
-                  title: _buildDialogItem(_selectedDialogCountry),
+                child: Center(
+                  child: ListTile(
+                    onTap: _openCountryPickerDialog,
+                    title: _buildDialogItem(_selectedDialogCountry),
+                  ),
                 ),
               )),
               Expanded(
@@ -137,6 +155,8 @@ class RegisterScreensState extends State<RegisterScreens> {
                             child: SvgPicture.asset(ImageResources.phoneIcon),
                           )),
                     ),
+                    hintText: 'Phone number (opt)',
+                    lable: 'Phone number (opt)',
                   ),
                 ),
               ),
