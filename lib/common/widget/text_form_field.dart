@@ -28,14 +28,14 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: 40,
       child: TextFormField(
         validator: validator,
         keyboardType: textInputType,
         controller: textEditingController,
         decoration: InputDecoration(
           hintStyle: GoogleFonts.poppins(
-            fontSize: 15,
+            fontSize: 11,
             fontWeight: FontWeight.w400,
             color: hintcolor,
           ),
@@ -46,10 +46,13 @@ class AppTextField extends StatelessWidget {
 
           border: OutlineInputBorder(
             borderSide:
-            const BorderSide(width: 1, color: Colors.grey),
-            borderRadius: BorderRadius.circular(10),
+            const BorderSide(width: 0.5, color: Colors.grey),
+            borderRadius: BorderRadius.circular(5),
 
           ),
+        ),
+        style: TextStyle(
+          fontSize: 13,
         ),
       ),
     );

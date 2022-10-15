@@ -24,7 +24,11 @@ class ImageResources{
   static const vehicalsIcon = '${images}vechiles.svg';
   static const mobileIcon = '${images}phone.svg';
   static const catagoryIcon = '${images}Category.svg';
-
-
+  static const bmw = '${images}BMW 2021.png';
+  static const pc = '${images}iMac Computer.png';
+  static const likeicon = '${images}likeicon.svg';
+  static const location = '${images}Locations.svg';
+  static const share = '${images}shares.svg';
+  static const trophyicon = '${images}trophyicon.svg';
 
 }

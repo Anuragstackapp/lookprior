@@ -16,7 +16,7 @@ class CustomWidgets {
         height: 44,
         // margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.all(Radius.circular(10))),
+            color: color, borderRadius: BorderRadius.all(Radius.circular(5))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/common/constant/image_const.dart';
 import 'package:lookprior/common/constant/string_const.dart';
 import 'package:lookprior/common/widget/widget.dart';
+import 'package:lookprior/screens/first_page/first_page.dart';
+import 'package:lookprior/screens/login_screen/login_screen.dart';
 import 'package:lookprior/screens/register_screens/register_screens.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future nextScreen() async {
     await Future.delayed(Duration(seconds: 3));
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return RegisterScreens();
+      return FirstPage();
     },));
 
   }

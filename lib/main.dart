@@ -16,6 +16,7 @@ import 'package:lookprior/screens/splash_screens/splash_screen.dart';
 //       theme: ThemeData(
 //         primarySwatch: Colors.blue,
 //       ),
+//API Collection : https://www.getpostman.com/collections/2b3e2d731ae23c6acd7e
 //       routes: {
 //         '/': (context) => DemoPage(),
 //       },

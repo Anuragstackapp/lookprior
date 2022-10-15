@@ -71,7 +71,7 @@ Widget password() {
           return null;
         },
         prefixIcon: Padding(
-          padding: const EdgeInsets.only(top: 9,right: 9,bottom: 9,left: 9),
+          padding: const EdgeInsets.only(top: 9,right: 13,bottom: 9,left: 13),
           child: Container(
               decoration: BoxDecoration(
                   color: Color(0xFFFEAFAF1),

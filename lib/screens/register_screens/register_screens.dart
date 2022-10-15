@@ -46,8 +46,8 @@ class RegisterScreensState extends State<RegisterScreens> {
             Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 44),
-                  child:Image.asset(ImageResources.registerLogo),
+                  padding: const EdgeInsets.only(top: 38),
+                  child:Image.asset(ImageResources.registerLogo,height: 56,width: 87),
                 )),
             Align(
               alignment: Alignment.topCenter,
@@ -72,8 +72,8 @@ class RegisterScreensState extends State<RegisterScreens> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40)),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
@@ -123,21 +123,21 @@ class RegisterScreensState extends State<RegisterScreens> {
               Expanded(
                 flex: 1,
                   child: Container(
-                    height: 45,
+                    height: 40,
                 decoration:
                     BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(5),
                       border: Border.all(
                         color: Colors.grey,
                       ),
 
                     ),
-                child: Center(
+
                   child: ListTile(
                     onTap: _openCountryPickerDialog,
                     title: _buildDialogItem(_selectedDialogCountry),
                   ),
-                ),
+
               )),
               Expanded(
                 flex: 2,
@@ -167,16 +167,19 @@ class RegisterScreensState extends State<RegisterScreens> {
     );
   }
 
-  Widget _buildDialogItem(Country country) => Row(
-        children: <Widget>[
-          CountryPickerUtils.getDefaultFlagImage(country),
-          Flexible(
-              child: Text(
-            "(${country.name})+${country.phoneCode}",
-            overflow: TextOverflow.ellipsis,
-          )),
-        ],
-      );
+  Widget _buildDialogItem(Country country) => Padding(
+    padding: const EdgeInsets.only(bottom: 18,right: 7),
+    child: Row(
+          children: <Widget>[
+            CountryPickerUtils.getDefaultFlagImage(country),
+            Flexible(
+                child: Text(
+              "(${country.name})+${country.phoneCode}",
+              overflow: TextOverflow.ellipsis,
+            )),
+          ],
+        ),
+  );
 
   void _openCountryPickerDialog() => showDialog(
         context: context,

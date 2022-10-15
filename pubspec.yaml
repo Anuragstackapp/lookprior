@@ -41,6 +41,7 @@ dependencies:
   country_picker: ^2.0.16
   country_pickers: ^2.0.0
   flutter_signin_button: ^2.0.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

@@ -19,7 +19,7 @@ class CommonElevatedButton extends StatelessWidget {
     this.onPressed,
     this.width,
     this.margin,
-    this.borderRadius = 9,
+    this.borderRadius = 5,
     this.textSize = 16,
   });
 
@@ -42,7 +42,7 @@ class CommonElevatedButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(buttonColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius!),
+              borderRadius: BorderRadius.circular(borderRadius),
             ),
           ),
         ),

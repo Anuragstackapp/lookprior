@@ -31,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                     alignment: Alignment.topCenter,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 44),
-                      child:Image.asset(ImageResources.registerLogo),
+                      padding: const EdgeInsets.only(top: 38),
+                      child:Image.asset(ImageResources.registerLogo,height: 56,width: 87),
                     )),
                 Align(
                   alignment: Alignment.topCenter,
@@ -73,11 +73,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 20),
+                                padding: const EdgeInsets.only(right: 18),
                                 child: TextButton(onPressed: () {
 
                                 }, child: Text("Forgot password?",style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.black,
                                   fontSize: 13,
                                 ),)),
