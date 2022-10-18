@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   final Border? border;
   final Color? hintcolor;
 
+
   const AppTextField(
       {super.key,
         this.lable,
@@ -22,7 +23,8 @@ class AppTextField extends StatelessWidget {
         this.hintText,
         this.errorText,
         this.validator,
-        this.border
+        this.border,
+
       });
 
   @override
@@ -30,6 +32,7 @@ class AppTextField extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: TextFormField(
+
         validator: validator,
         keyboardType: textInputType,
         controller: textEditingController,

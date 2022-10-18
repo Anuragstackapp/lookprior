@@ -9,6 +9,9 @@ import 'package:lookprior/common/widget/elevated_button.dart';
 import 'package:lookprior/screens/login_screen/login_screen.dart';
 
 
+import '../../common/widget/commaneText.dart';
+import '../../common/widget/common_listtile.dart';
+
 import '../../common/widget/text_form_field.dart';
 
 
@@ -137,6 +140,115 @@ Widget adsText(){
       ),)
     ],),
   );
+}
+draweropen(BuildContext context) {
+  return Drawer(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(60), bottomRight: Radius.circular(60)),
+      ),
+      child: ListView(children: [
+        Container(
+            height: 125,
+            color: ColorsResources.registerScreen,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: SvgPicture.asset(
+                      ImageResources.userlogo,
+                    ),
+                  ),
+                ),
+                const CommonText(
+                    text: StringResources.drawername,
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+                InkWell(
+                  onTap: () {
+
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const LoginScreen();
+                      },
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 5),
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: SvgPicture.asset(
+                        ImageResources.arrowicon,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )),
+        const SizedBox(
+          height: 15,
+        ),
+        const CommonListTile(
+          text: ImageResources.camera,
+          titletext: StringResources.camera,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
+        ),
+        CommonListTile(
+          onTap: () {
+            Navigator.pop(context);
+            // Navigator.push(
+            //     context, CommonNavigator(child: const CategoryPage()));
+          },
+          text: ImageResources.category,
+          titletext: StringResources.categories,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
+        ),
+        const CommonListTile(
+          text: ImageResources.ads,
+          titletext: StringResources.ads,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
+        ),
+        const CommonListTile(
+          text: ImageResources.space,
+          titletext: StringResources.space,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
+        ),
+        CommonListTile(
+          onTap: () {},
+          text: ImageResources.user,
+          titletext: StringResources.user,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
+        ),
+        const CommonListTile(
+          text: ImageResources.help,
+          titletext: StringResources.help,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 60, right: 170),
+          child: SizedBox(
+              height: 56,
+              width: 86,
+              child: Image.asset(ImageResources.splaceLogo)),
+        ),
+      ]));
 }
 
 

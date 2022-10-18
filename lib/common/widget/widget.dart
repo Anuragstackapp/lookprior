@@ -20,114 +20,12 @@ void statusBarColor() {
   );
 }
 
-Widget name() {
-  return Align(
-    alignment: Alignment.center,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 25, top: 30, right: 25),
-      child: AppTextField(
 
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(bottom: 8,top: 8,right: 8,left: 4),
-          child: SvgPicture.asset(ImageResources.userIcon),
-        ),
-        hintText: 'Your Name',
-        lable: 'Your Name',
-        hintcolor: Colors.grey,
-      ),
-    ),
-  );
-}
 
-Widget email() {
-  return Align(
-    alignment: Alignment.center,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 25, top: 15, right: 25),
-      child: AppTextField(
 
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(bottom: 8,top: 8,right: 8,left: 4),
-          child: SvgPicture.asset(ImageResources.emailIcon),
-        ),
-        hintText: 'Email Address',
-        lable: 'Email Address',
-        hintcolor: Colors.grey,
-      ),
-    ),
-  );
-}
 
-Widget password() {
-  return Align(
-    alignment: Alignment.center,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 25, top: 15, right: 25),
-      child: AppTextField(
-        validator: (value) {
-          if(value == null){
-            return 'enter user email address';
-          }
-          return null;
-        },
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(top: 9,right: 13,bottom: 9,left: 13),
-          child: Container(
-              decoration: BoxDecoration(
-                  color: Color(0xFFFEAFAF1),
-                  borderRadius: BorderRadius.circular(3)),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: SvgPicture.asset(ImageResources.passwordIcon),
-              )),
-        ),
-        hintText: 'Password',
-        lable: 'Password',
-        hintcolor: Colors.grey,
-      ),
-    ),
-  );
-}
-Widget conformPassword() {
-  return Align(
-    alignment: Alignment.center,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 25, top: 15, right: 25),
-      child: AppTextField(
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(top: 9,right: 9,bottom: 9,left: 9),
-          child: Container(
-              decoration: BoxDecoration(
-                  color: Color(0xFFFEAFAF1),
-                  borderRadius: BorderRadius.circular(3)),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: SvgPicture.asset(ImageResources.passwordIcon),
-              )),
-        ),
-        hintText: 'Confirm password',
-        lable: 'Confirm password',
-        hintcolor: Colors.grey,
-      ),
-    ),
-  );
-}
-Widget registerButton(BuildContext context){
-  return Padding(
-    padding: const EdgeInsets.only(left: 25,top: 30,right: 25),
-    child: CommonElevatedButton(
-      onPressed: () {
 
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          return LoginScreen();
-        },));
-      },
-      textColor: Colors.white,
-      buttonColor: ColorsResources.registerScreen,
-      text: 'Register',
-    ),
-  );
-}
+
 
 Widget facbookButton(){
   return Padding(
