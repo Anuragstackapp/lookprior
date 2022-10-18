@@ -47,7 +47,7 @@ class RegisterPageViewModel{
             }
 
           }
-
+//API Collection : https://www.getpostman.com/collections/2b3e2d731ae23c6acd7e
           if(name!.text.isEmpty){
 
           }else if(email!.text.isEmpty){
