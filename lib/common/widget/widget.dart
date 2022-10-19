@@ -8,6 +8,8 @@ import 'package:lookprior/common/constant/image_const.dart';
 import 'package:lookprior/common/widget/custom_button.dart';
 import 'package:lookprior/common/widget/elevated_button.dart';
 import 'package:lookprior/common/widget/text_form_field.dart';
+import 'package:lookprior/screens/first_page/first_page.dart';
+import 'package:lookprior/screens/login_screen/googlesign.dart';
 import 'package:lookprior/screens/login_screen/login_screen.dart';
 
 
@@ -37,12 +39,20 @@ Widget facbookButton(){
   );
 }
 
-Widget appleButton(){
+Widget appleButton(BuildContext context){
   return Padding(
     padding: const EdgeInsets.only(left: 25,top: 15,right: 25),
     child: CustomWidgets.socialButtonRect(
-      "Login with Apple", ColorsResources.appleButton, ImageResources.apple,
+      onTap: () async {
+        debugPrint("Done Google");
+        GoogleSign().signInGoogle().then((value) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            return FirstPage();
+          },));
+        },);
 
+      },
+      "Login with Apple", ColorsResources.appleButton, ImageResources.apple,
     ),
   );
 }
@@ -57,4 +67,6 @@ Widget information(){
     ),
   );
 }
+
+
 

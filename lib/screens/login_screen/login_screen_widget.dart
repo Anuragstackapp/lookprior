@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lookprior/common/widget/textbutton.dart';
 import 'package:lookprior/screens/first_page/first_page.dart';
 import 'package:lookprior/screens/register_screens/register_screens.dart';
@@ -36,21 +37,7 @@ Widget loginSecondTitelText(){
   );
 }
 
-Widget loginButton(BuildContext context){
-  return Padding(
-    padding: const EdgeInsets.only(left: 25,top: 15,right: 25),
-    child: CommonElevatedButton(
-      onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          return FirstPage();
-        },));
-      },
-      textColor: Colors.white,
-      buttonColor: ColorsResources.registerScreen,
-      text: 'Login',
-    ),
-  );
-}
+
 
 Widget registerAccount(BuildContext context){
   return Padding(
@@ -78,3 +65,4 @@ Widget registerAccount(BuildContext context){
     ),
   );
 }
+

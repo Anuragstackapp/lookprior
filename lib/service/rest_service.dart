@@ -6,8 +6,7 @@ class RestService{
  static const String baseUrl = 'https://lookprstage.com/admin/';
  static const String signUpeApi = '/api/v1/data/signup';
 
- static dynamic postRestMethods({@ required String? endPoint, @ required Map<String , dynamic>? bodyParam}) async {
-
+ static dynamic postRestMethods({@ required String? endPoint, @ required Map<String, dynamic>? bodyParam}) async {
 
   try {
     String url = "${baseUrl}${endPoint}";

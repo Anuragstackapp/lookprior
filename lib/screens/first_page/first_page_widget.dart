@@ -21,6 +21,7 @@ import '../../common/widget/text_form_field.dart';
 
 Future alertDilog(BuildContext context) {
   return showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (context) {
       return AlertDialog(
@@ -151,44 +152,49 @@ draweropen(BuildContext context) {
         Container(
             height: 125,
             color: ColorsResources.registerScreen,
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: SvgPicture.asset(
-                      ImageResources.userlogo,
-                    ),
-                  ),
-                ),
-                const CommonText(
-                    text: StringResources.drawername,
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500),
-                InkWell(
-                  onTap: () {
-
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const LoginScreen();
-                      },
-                    ));
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const LoginScreen();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 5),
+                ));
+              },
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: SizedBox(
-                      height: 20,
-                      width: 20,
+                      height: 60,
+                      width: 60,
                       child: SvgPicture.asset(
-                        ImageResources.arrowicon,
+                        ImageResources.userlogo,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  const CommonText(
+                      text: StringResources.drawername,
+                      fontSize: 14,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500),
+                  InkWell(
+                    onTap: () {
+
+
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 5),
+                      child: SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: SvgPicture.asset(
+                          ImageResources.arrowicon,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             )),
         const SizedBox(
           height: 15,

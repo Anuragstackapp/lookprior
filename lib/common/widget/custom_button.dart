@@ -6,11 +6,9 @@ class CustomWidgets {
   // final double? width;
   //
   // CustomWidgets({this.width});
-  static Widget socialButtonRect(title, color, icon, {Function? onTap}) {
+  static Widget socialButtonRect(title, color, icon, {GestureTapCallback? onTap}) {
     return InkWell(
-      onTap: () {
-        onTap!();
-      },
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         height: 44,

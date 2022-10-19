@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/screens/register_screens/register_screens.dart';
 import 'package:lookprior/service/rest_service.dart';
 import '../../common/constant/color_const.dart';
 import '../../common/widget/elevated_button.dart';
+import '../login_screen/login_screen.dart';
 
 
 
@@ -17,63 +20,61 @@ class RegisterPageViewModel{
   TextEditingController password = TextEditingController();
   TextEditingController cpassword = TextEditingController();
   String? code;
+  FirebaseMessaging firebaseMessaging =  FirebaseMessaging.instance;
+  bool checkStatus = false;
+
+
 
   RegisterScreensState? registerScreensState;
 
   RegisterPageViewModel(this.registerScreensState);
 
+  alertDilog(BuildContext context,{String? messge}){
+   return showDialog(
+     barrierDismissible: false,
+     context: context, builder: (context) {
+     return Padding(
+       padding: const EdgeInsets.only(right: 10,left: 10),
+       child: AlertDialog(
+         alignment: Alignment.center,
+         shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(10),
+         ),
+         content: Text(messge!,
+             overflow: TextOverflow.clip,
+             style: GoogleFonts.poppins(
+           fontWeight: FontWeight.w500,
+           color: Colors.black,
+           fontSize: 18,
+
+         )),
+         actions: [
+           Padding(
+             padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom:5),
+             child: CommonElevatedButton(
+               onPressed: () {
+                 registerScreensState!.setState(() {
+                   checkStatus = false;
+                 });
+
+                 Navigator.pop(context);
+               },
+               textSize: 20,
+               buttonColor: ColorsResources.registerScreen,
+               text: 'Ok',
+               borderRadius: 10,
+               textColor: Colors.white,
+
+             ),
+           ),
+         ],
+       ),
+     );
+   },);
+ }
 
 
-  Widget registerButton(BuildContext context, {TextEditingController? name, String? code,TextEditingController? email,TextEditingController? phone,TextEditingController? password,TextEditingController? cpassword}){
-    return Padding(
-      padding: const EdgeInsets.only(left: 25,top: 30,right: 25),
-      child: CommonElevatedButton(
-        onPressed: () async {
 
-          Map<String ,dynamic> sigunUp = {
-            "email" : 'auarg@',
-            "name" : 'anc'
-          };
-
-         String? sigupBodyespose = await RestService.postRestMethods(endPoint: RestService.signUpeApi, bodyParam: sigunUp);
-
-         print("sigupBodyespose --> ${sigupBodyespose}");
-          if(sigupBodyespose != null && sigupBodyespose.isNotEmpty){
-            Map<String,dynamic> signUpResponseMap = jsonDecode(sigupBodyespose);
-
-            print("signUpResponseMap ---> ${signUpResponseMap.toString()}");
-            if(signUpResponseMap.containsKey('Success') && signUpResponseMap['Success']){
-
-            }
-
-          }
-//API Collection : https://www.getpostman.com/collections/2b3e2d731ae23c6acd7e
-          if(name!.text.isEmpty){
-
-          }else if(email!.text.isEmpty){
-
-          }else if(phone!.text.isEmpty){
-
-          }else if(password!.text.isEmpty){
-
-          }else if(password.text != cpassword!.text){
-
-          }
-
-          // print("print name  -->  ${name!.text}");
-          // print("print code!  -->  ${code} name --> ${name.text} mail -->  ${email!.text} phone -->  ${phone!.text} password -->  ${password!.text} cpassword -->  ${cpassword!.text}");
-
-          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          //   return LoginScreen();
-          // },));
-
-        },
-        textColor: Colors.white,
-        buttonColor: ColorsResources.registerScreen,
-        text: 'Register',
-      ),
-    );
-  }
 
 }
 

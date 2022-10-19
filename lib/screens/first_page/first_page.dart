@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lookprior/common/widget/commane_scroll_behavior.dart';
 import 'package:lookprior/screens/first_page/categories_api_model/categories_api_model.dart';
 import 'package:lookprior/screens/first_page/first_page_view_model.dart';
 import 'package:lookprior/screens/first_page/first_page_widget.dart';
@@ -104,7 +105,7 @@ class FirstPageState extends State<FirstPage> {
 
   Widget categoryItem() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
+      padding: const EdgeInsets.only( left: 15, right: 15),
       child: Container(
         height: 80,
         width: double.infinity,
@@ -381,249 +382,257 @@ class FirstPageState extends State<FirstPage> {
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30)),
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          categoryItem(),
-                          adsText(),
-                          SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Container(
+                        child: ScrollConfiguration(
+                          behavior: MyBehavior(),
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                SizedBox(
-                                  height: 193,
-                                  child: ListView.builder(
-                                    itemCount: 4,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return Card(
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.topRight,
-                                              height: 90,
-                                              width: 140,
-                                              margin: const EdgeInsets.all(10),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey,
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          adsimg[index]),
-                                                      fit: BoxFit.fill),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(5))),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: SvgPicture.asset(
-                                                  ImageResources.likeicon,
-                                                ),
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CommonText(
-                                                    text: modelname[index],
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14),
-                                                const SizedBox(
-                                                  width: 4,
-                                                ),
-                                                CommonText(
-                                                    text: prizename[index],
-                                                    fontWeight: FontWeight.w500,
-                                                    color: ColorsResources
-                                                        .registerScreen,
-                                                    fontSize: 10),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                SvgPicture.asset(
-                                                  ImageResources.location,
-                                                  height: 11,
-                                                ),
-                                                CommonText(
-                                                  text: locationname1[index],
-                                                  fontSize: 10,
-                                                  color: Colors.grey,
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 27,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                      color: ColorsResources
-                                                          .registerScreen,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
-                                                  child: Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      width: 76,
-                                                      child: SvgPicture.asset(
-                                                        ImageResources.share,
-                                                        height: 40,
-                                                      )),
-                                                ),
-                                                const SizedBox(
-                                                  width: 30,
-                                                ),
-                                                SvgPicture.asset(
-                                                  ImageResources.trophyicon,
-                                                  height: 27,
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 5, right: 250, left: 15),
-                                    child: CommonText(
-                                      text: 'Near you',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    )),
-                                SizedBox(
-                                  child: GridView.builder(
-                                    itemCount: 4,
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            childAspectRatio: 0.9,
-                                            crossAxisCount: 2),
-                                    itemBuilder: (context, index) {
-                                      return Card(
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.topRight,
-                                              height: 90,
-                                              width: 140,
-                                              margin: const EdgeInsets.all(10),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey,
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          gridimg[index]),
-                                                      fit: BoxFit.fill),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(10))),
-                                              child: SvgPicture.asset(
-                                                ImageResources.likeicon,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  CommonText(
-                                                      text: gridname[index],
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 14),
-                                                  const SizedBox(
-                                                    width: 4,
-                                                  ),
-                                                  CommonText(
-                                                      text: prizename[index],
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: ColorsResources
-                                                          .registerScreen,
-                                                      fontSize: 10),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    ImageResources.location,
-                                                    height: 11,
-                                                  ),
-                                                  CommonText(
-                                                    text: locationname1[index],
-                                                    fontSize: 10,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Row(
+                                categoryItem(),
+                                adsText(),
+                                SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 193,
+                                        child: ListView.builder(
+                                          itemCount: 4,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Card(
+                                              child: Column(
                                                 children: [
                                                   Container(
-                                                    height: 26,
-                                                    alignment: Alignment.center,
+                                                    alignment: Alignment.topRight,
+                                                    height: 90,
+                                                    width: 140,
+                                                    margin: const EdgeInsets.all(10),
                                                     decoration: BoxDecoration(
-                                                        color: ColorsResources
-                                                            .registerScreen,
+                                                        color: Colors.grey,
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                adsimg[index]),
+                                                            fit: BoxFit.fill),
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(6)),
-                                                    child: Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        width: 76,
-                                                        child: SvgPicture.asset(
-                                                          ImageResources.share,
-                                                          height: 40,
-                                                        )),
+                                                            const BorderRadius.all(
+                                                                Radius.circular(5))),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(5.0),
+                                                      child: SvgPicture.asset(
+                                                        ImageResources.likeicon,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      CommonText(
+                                                          text: modelname[index],
+                                                          fontWeight: FontWeight.w400,
+                                                          fontSize: 14),
+                                                      const SizedBox(
+                                                        width: 4,
+                                                      ),
+                                                      CommonText(
+                                                          text: prizename[index],
+                                                          fontWeight: FontWeight.w500,
+                                                          color: ColorsResources
+                                                              .registerScreen,
+                                                          fontSize: 10),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        ImageResources.location,
+                                                        height: 11,
+                                                      ),
+                                                      CommonText(
+                                                        text: locationname1[index],
+                                                        fontSize: 10,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ],
                                                   ),
                                                   const SizedBox(
-                                                    width: 30,
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        height: 27,
+                                                        alignment: Alignment.center,
+                                                        decoration: BoxDecoration(
+                                                            color: ColorsResources
+                                                                .registerScreen,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    5)),
+                                                        child: Container(
+                                                            alignment:
+                                                                Alignment.center,
+                                                            width: 76,
+                                                            child: SvgPicture.asset(
+                                                              ImageResources.share,
+                                                              height: 40,
+                                                            )),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 30,
+                                                      ),
+                                                      SvgPicture.asset(
+                                                        ImageResources.trophyicon,
+                                                        height: 27,
+                                                      )
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
+                                            );
+                                          },
                                         ),
-                                      );
-                                    },
+                                      ),
+                                      const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 5, right: 250, left: 15),
+                                          child: CommonText(
+                                            text: 'Near you',
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                          )),
+                                      SizedBox(
+                                        child: GridView.builder(
+                                          itemCount: 4,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                                  childAspectRatio: 0.9,
+                                                  crossAxisCount: 2),
+                                          itemBuilder: (context, index) {
+                                            return Card(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.topRight,
+                                                    height: 90,
+                                                    width: 140,
+                                                    margin: const EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey,
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                gridimg[index]),
+                                                            fit: BoxFit.fill),
+                                                        borderRadius:
+                                                            const BorderRadius.all(
+                                                                Radius.circular(10))),
+                                                    child: SvgPicture.asset(
+                                                      ImageResources.likeicon,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 10),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        CommonText(
+                                                            text: gridname[index],
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14),
+                                                        const SizedBox(
+                                                          width: 4,
+                                                        ),
+                                                        CommonText(
+                                                            text: prizename[index],
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: ColorsResources
+                                                                .registerScreen,
+                                                            fontSize: 10),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 10),
+                                                    child: Row(
+                                                      children: [
+                                                        SvgPicture.asset(
+                                                          ImageResources.location,
+                                                          height: 11,
+                                                        ),
+                                                        CommonText(
+                                                          text: locationname1[index],
+                                                          fontSize: 10,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 10),
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 26,
+                                                          alignment: Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                              color: ColorsResources
+                                                                  .registerScreen,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(6)),
+                                                          child: Container(
+                                                              alignment:
+                                                                  Alignment.center,
+                                                              width: 76,
+                                                              child: SvgPicture.asset(
+                                                                ImageResources.share,
+                                                                height: 40,
+                                                              )),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
+
+                                // conteryCode(context),
                               ],
                             ),
                           ),
-
-                          // conteryCode(context),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -677,7 +686,8 @@ class FirstPageState extends State<FirstPage> {
               ));
             });
           },
-        ));
+        )
+    );
   }
 }
 //

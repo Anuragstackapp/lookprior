@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "876899949228",
+    "project_id": "lookprior-365812",
+    "storage_bucket": "lookprior-365812.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876899949228:android:c371f6b90fd3703ef81d09",
+        "android_client_info": {
+          "package_name": "com.example.lookprior"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876899949228-k2tjpbp2grp3h3de8dhlna31fddm1eof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lookprior",
+            "certificate_hash": "a620297965de1a5b31c98798008c24696cd83d45"
+          }
+        },
+        {
+          "client_id": "876899949228-qqfcqi6657iuur0q3pgmqqt2becpfi9f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_MW07vUfqm_EgoB5Zb2TnkBy4-OE4UeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876899949228-qqfcqi6657iuur0q3pgmqqt2becpfi9f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
