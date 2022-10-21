@@ -1,4 +1,3 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,26 +7,27 @@ import 'package:lookprior/screens/first_page/first_page_view_model.dart';
 import 'package:lookprior/screens/first_page/first_page_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:lookprior/screens/location_page/location_page.dart';
-import 'package:lookprior/screens/login_screen/login_screen.dart';
 import '../../common/constant/color_const.dart';
 import '../../common/constant/image_const.dart';
 import '../../common/constant/string_const.dart';
 import '../../common/widget/commaneText.dart';
 import '../../common/widget/common_navigator.dart';
-import '../like_page/like_page.dart';
-import '../message_page/message_page.dart';
 import '../notifications_page/notifications_page.dart';
-import '../post_add_page/post_add_page.dart';
+
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  GlobalKey<ScaffoldState>? scaffoldState;
+  FirstPage({this.scaffoldState});
+
+
+
 
   @override
   State<FirstPage> createState() => FirstPageState();
 }
 
 class FirstPageState extends State<FirstPage> {
-  var _bottomNavIndex = 0;
+
   late Audio audio;
   bool catecoryCheck = false;
   List<String> adsimg = [
@@ -55,31 +55,21 @@ class FirstPageState extends State<FirstPage> {
     (StringResources.wallet),
     (StringResources.ring)
   ];
-  List<Widget> navigator = [
-    const FirstPage(),
-    const LikePage(),
-    const MessagePage(),
-    const LoginScreen(),
-  ];
+
   List<String> gridimg = [
     (ImageResources.grid1pic),
     (ImageResources.grid2pic),
     (ImageResources.grid3pic),
     (ImageResources.grid4pic)
   ];
-  List<String> iconimg = [
-    (ImageResources.home),
-    (ImageResources.heart),
-    (ImageResources.message),
-    (ImageResources.usericon)
-  ];
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-      Duration(seconds: 0),
+      const Duration(seconds: 0),
       () {
         alertDilog(context);
       },
@@ -285,10 +275,10 @@ class FirstPageState extends State<FirstPage> {
                       ),
                     ],
                   )
-                : Center(
+                : const Center(
                     child: Text("No Data Found"),
                   ))
-            : Center(child: CircularProgressIndicator()),
+            : const Center(child: CircularProgressIndicator()),
       ),
     );
   }
@@ -298,280 +288,161 @@ class FirstPageState extends State<FirstPage> {
 
     FirstPageViewModel? firstPageViewModel;
     firstPageViewModel = (firstPageViewModel ?? FirstPageViewModel(this));
-    GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      key: _scaffoldState,
-        // drawerEnableOpenDragGesture: true,
-        drawer: draweropen(context),
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-            child: Container(
-          height: size.height,
-          width: size.width,
-          color: ColorsResources.registerScreen,
-          child: Stack(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 15, right: 12, left: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          print("true");
-                          _scaffoldState.currentState!.openDrawer();
-                          // setState(() {});
-                        },
-                        child: SvgPicture.asset(ImageResources.drawerIcon,
-                            height: 20, width: 30)),
-                    Image.asset(ImageResources.firstPageIcon,
-                        width: 60, height: 50),
-                    InkWell(
-                      onTap: () {
+    return  Scaffold(
+      resizeToAvoidBottomInset: false,
+     appBar:AppBar(
+        backgroundColor: ColorsResources.registerScreen,
+        elevation: 0,
+        leading:InkWell(
+            onTap: () {
+              print("true");
+              widget.scaffoldState!.currentState!.openDrawer();
+              setState(() {});
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(ImageResources.drawerIcon),
+            )) ,
+        title: Center(child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Image.asset(ImageResources.firstPageIcon),
+        ),),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {
 
-                        Navigator.push(context,
-                            CommonNavigator(child: const NotificationsPage()));
-                      },
-                      child: SvgPicture.asset(ImageResources.notiFicationIcon,
-                          height: 37, width: 20),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 80, right: 12, left: 15),
-                child: Container(
-                  height: 40,
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                          flex: 7,
-                          child: Container(
-                            child: seachTextFild(),
-                          )),
-                      Expanded(
-                          flex: 1,
-                          child: InkWell(
-                             onTap: () {
+                Navigator.push(context,
+                    CommonNavigator(child: const NotificationsPage()));
+              },
+              child: SvgPicture.asset(ImageResources.notiFicationIcon,
+                  height: 37, width: 20),
+            ),
+          ),
+        ],
+      ),
+      body:SafeArea(
+          child: Container(
+            height: size.height,
+            width: size.width,
+            color: ColorsResources.registerScreen,
+            child: Stack(
+              children: [
 
-                      Navigator.push(context,
-                      CommonNavigator(child: const LocationPage()));
-                      },
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, right: 8, left: 15),
+                  child: Container(
+                    height: 40,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                            flex: 7,
                             child: Container(
-                              child: SvgPicture.asset(
-                                ImageResources.locationIcon,
+                              child: seachTextFild(),
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () {
+
+                                Navigator.push(context,
+                                    CommonNavigator(child: const LocationPage()));
+                              },
+                              child: Container(
+                                child: SvgPicture.asset(
+                                  ImageResources.locationIcon,
+                                ),
                               ),
-                            ),
-                          )),
-                    ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 142),
-                  child: Container(
-                    height: double.infinity,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Container(
-                        child: ScrollConfiguration(
-                          behavior: MyBehavior(),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                categoryItem(),
-                                adsText(),
-                                SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 193,
-                                        child: ListView.builder(
-                                          itemCount: 4,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Card(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    alignment: Alignment.topRight,
-                                                    height: 90,
-                                                    width: 140,
-                                                    margin: const EdgeInsets.all(10),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey,
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                                adsimg[index]),
-                                                            fit: BoxFit.fill),
-                                                        borderRadius:
-                                                            const BorderRadius.all(
-                                                                Radius.circular(5))),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(5.0),
-                                                      child: SvgPicture.asset(
-                                                        ImageResources.likeicon,
+                Align(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: Container(
+                      height: double.infinity,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Container(
+                          child: ScrollConfiguration(
+                            behavior: MyBehavior(),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  categoryItem(),
+                                  adsText(),
+                                  SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 193,
+                                          child: ListView.builder(
+                                            itemCount: 4,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      alignment: Alignment.topRight,
+                                                      height: 90,
+                                                      width: 140,
+                                                      margin: const EdgeInsets.all(10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.grey,
+                                                          image: DecorationImage(
+                                                              image: AssetImage(
+                                                                  adsimg[index]),
+                                                              fit: BoxFit.fill),
+                                                          borderRadius:
+                                                          const BorderRadius.all(
+                                                              Radius.circular(5))),
+                                                      child: Padding(
+                                                        padding:
+                                                        const EdgeInsets.all(5.0),
+                                                        child: SvgPicture.asset(
+                                                          ImageResources.likeicon,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      CommonText(
-                                                          text: modelname[index],
-                                                          fontWeight: FontWeight.w400,
-                                                          fontSize: 14),
-                                                      const SizedBox(
-                                                        width: 4,
-                                                      ),
-                                                      CommonText(
-                                                          text: prizename[index],
-                                                          fontWeight: FontWeight.w500,
-                                                          color: ColorsResources
-                                                              .registerScreen,
-                                                          fontSize: 10),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        ImageResources.location,
-                                                        height: 11,
-                                                      ),
-                                                      CommonText(
-                                                        text: locationname1[index],
-                                                        fontSize: 10,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 27,
-                                                        alignment: Alignment.center,
-                                                        decoration: BoxDecoration(
-                                                            color: ColorsResources
-                                                                .registerScreen,
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                    5)),
-                                                        child: Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 76,
-                                                            child: SvgPicture.asset(
-                                                              ImageResources.share,
-                                                              height: 40,
-                                                            )),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 30,
-                                                      ),
-                                                      SvgPicture.asset(
-                                                        ImageResources.trophyicon,
-                                                        height: 27,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      const Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 5, right: 250, left: 15),
-                                          child: CommonText(
-                                            text: 'Near you',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                          )),
-                                      SizedBox(
-                                        child: GridView.builder(
-                                          itemCount: 4,
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  childAspectRatio: 0.9,
-                                                  crossAxisCount: 2),
-                                          itemBuilder: (context, index) {
-                                            return Card(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    alignment: Alignment.topRight,
-                                                    height: 90,
-                                                    width: 140,
-                                                    margin: const EdgeInsets.all(10),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey,
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                                gridimg[index]),
-                                                            fit: BoxFit.fill),
-                                                        borderRadius:
-                                                            const BorderRadius.all(
-                                                                Radius.circular(10))),
-                                                    child: SvgPicture.asset(
-                                                      ImageResources.likeicon,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    child: Row(
+                                                    Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                       children: [
                                                         CommonText(
-                                                            text: gridname[index],
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                            text: modelname[index],
+                                                            fontWeight: FontWeight.w400,
                                                             fontSize: 14),
                                                         const SizedBox(
                                                           width: 4,
                                                         ),
                                                         CommonText(
                                                             text: prizename[index],
-                                                            fontWeight:
-                                                                FontWeight.w500,
+                                                            fontWeight: FontWeight.w500,
                                                             color: ColorsResources
                                                                 .registerScreen,
                                                             fontSize: 10),
                                                       ],
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    child: Row(
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                       children: [
                                                         SvgPicture.asset(
                                                           ImageResources.location,
@@ -584,28 +455,23 @@ class FirstPageState extends State<FirstPage> {
                                                         ),
                                                       ],
                                                     ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    child: Row(
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Row(
                                                       children: [
                                                         Container(
-                                                          height: 26,
+                                                          height: 27,
                                                           alignment: Alignment.center,
                                                           decoration: BoxDecoration(
                                                               color: ColorsResources
                                                                   .registerScreen,
                                                               borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(6)),
+                                                              BorderRadius.circular(
+                                                                  5)),
                                                           child: Container(
                                                               alignment:
-                                                                  Alignment.center,
+                                                              Alignment.center,
                                                               width: 76,
                                                               child: SvgPicture.asset(
                                                                 ImageResources.share,
@@ -615,21 +481,147 @@ class FirstPageState extends State<FirstPage> {
                                                         const SizedBox(
                                                           width: 30,
                                                         ),
+                                                        SvgPicture.asset(
+                                                          ImageResources.trophyicon,
+                                                          height: 27,
+                                                        )
                                                       ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                        const Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 5, right: 250, left: 15),
+                                            child: CommonText(
+                                              text: 'Near you',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                        SizedBox(
+                                          child: GridView.builder(
+                                            itemCount: 4,
+                                            shrinkWrap: true,
+                                            physics:
+                                            const NeverScrollableScrollPhysics(),
+                                            gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                childAspectRatio: 0.9,
+                                                crossAxisCount: 2),
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      alignment: Alignment.topRight,
+                                                      height: 90,
+                                                      width: 140,
+                                                      margin: const EdgeInsets.all(10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.grey,
+                                                          image: DecorationImage(
+                                                              image: AssetImage(
+                                                                  gridimg[index]),
+                                                              fit: BoxFit.fill),
+                                                          borderRadius:
+                                                          const BorderRadius.all(
+                                                              Radius.circular(10))),
+                                                      child: SvgPicture.asset(
+                                                        ImageResources.likeicon,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                        children: [
+                                                          CommonText(
+                                                              text: gridname[index],
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              fontSize: 14),
+                                                          const SizedBox(
+                                                            width: 4,
+                                                          ),
+                                                          CommonText(
+                                                              text: prizename[index],
+                                                              fontWeight:
+                                                              FontWeight.w500,
+                                                              color: ColorsResources
+                                                                  .registerScreen,
+                                                              fontSize: 10),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                      child: Row(
+                                                        children: [
+                                                          SvgPicture.asset(
+                                                            ImageResources.location,
+                                                            height: 11,
+                                                          ),
+                                                          CommonText(
+                                                            text: locationname1[index],
+                                                            fontSize: 10,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                      child: Row(
+                                                        children: [
+                                                          Container(
+                                                            height: 26,
+                                                            alignment: Alignment.center,
+                                                            decoration: BoxDecoration(
+                                                                color: ColorsResources
+                                                                    .registerScreen,
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(6)),
+                                                            child: Container(
+                                                                alignment:
+                                                                Alignment.center,
+                                                                width: 76,
+                                                                child: SvgPicture.asset(
+                                                                  ImageResources.share,
+                                                                  height: 40,
+                                                                )),
+                                                          ),
 
-                                // conteryCode(context),
-                              ],
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // conteryCode(context),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -637,56 +629,9 @@ class FirstPageState extends State<FirstPage> {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        )),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context, CommonNavigator(child: const PostAddPage()));
-          },
-          backgroundColor: ColorsResources.registerScreen,
-          child: const Icon(
-            size: 40,
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-          //notchSmoothness: NotchSmoothness.verySmoothEdge,
-          activeIndex: _bottomNavIndex,
-          gapLocation: GapLocation.center,
-          itemCount: 4,
-          tabBuilder: (index, isActive) {
-            return Container(
-              height: 27,
-              width: 27,
-              margin:
-                  const EdgeInsets.only(top: 7, left: 9, bottom: 8, right: 12),
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: SvgPicture.asset(
-                  color:
-                      isActive ? ColorsResources.registerScreen : Colors.grey,
-                  iconimg[index],
-                ),
-              ),
-            );
-          },
-          onTap: (index) {
-            setState(() {
-              _bottomNavIndex = index;
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return navigator[index];
-                },
-              ));
-            });
-          },
-        )
+              ],
+            ),
+          )),
     );
   }
 }

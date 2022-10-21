@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future nextScreen() async {
     await Future.delayed(Duration(seconds: 3));
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return FirstPage();
+      return BottambarPage();
     },));
 
   }

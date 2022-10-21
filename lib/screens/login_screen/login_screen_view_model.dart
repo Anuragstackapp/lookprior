@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/screens/login_screen/login_screen.dart';
 
 import '../../common/constant/color_const.dart';
+import '../../common/constant/image_const.dart';
+import '../../common/widget/custom_button.dart';
 import '../../common/widget/elevated_button.dart';
 
 class LoginScreenViewModel{
@@ -17,6 +19,17 @@ class LoginScreenViewModel{
   LoginScreenState? loginScreenState;
   LoginScreenViewModel(this.loginScreenState);
 
+  Widget facbookButton(){
+    return Padding(
+      padding: const EdgeInsets.only(left: 25,top: 10,right: 25),
+      child: CustomWidgets.socialButtonRect(
+        onTap: () {
+
+        },
+        "Login with Facebook", ColorsResources.facbookButton, ImageResources.facebook,
+      ),
+    );
+  }
 
   alertDilog(BuildContext context,{String? messge}){
     return showDialog(

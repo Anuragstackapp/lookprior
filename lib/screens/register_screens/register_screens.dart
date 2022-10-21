@@ -260,7 +260,7 @@ class RegisterScreensState extends State<RegisterScreens> {
                                     ),
                                   ),
                                   divderrow(),
-                                  facbookButton(),
+                                  registerPageViewModel!.facbookButton(),
                                   appleButton(context),
                                   information(),
 

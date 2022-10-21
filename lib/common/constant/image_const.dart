@@ -79,5 +79,8 @@ class ImageResources{
 
   static const Locationicon1 = '${images}Locationicon1.svg';
 
+  static const editicon = '${images}Edit.svg';
+  static const profileuser = '${images}profileuser.png';
+
 
 }

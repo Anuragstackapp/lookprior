@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
         home: SplashScreen(),
         debugShowCheckedModeBanner: false,
 
+
       ),
     );
   }

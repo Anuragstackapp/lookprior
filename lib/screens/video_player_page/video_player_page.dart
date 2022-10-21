@@ -43,7 +43,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('VideoPlayer'),
+        title: const Text('VideoPlayer'),
         backgroundColor: ColorsResources.registerScreen,
       ),
       body: FutureBuilder(
@@ -55,7 +55,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: VideoPlayer(_controller),
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

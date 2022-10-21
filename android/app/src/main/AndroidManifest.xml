@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lookprior">
 
+    <queries>
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+    </queries>
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -38,7 +42,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-       <meta-data android:name="com.google.android.geo.API_KEY"
+        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyAcfw-fHPYRwa3gMfww9x8HXiXdjsKvuXc"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

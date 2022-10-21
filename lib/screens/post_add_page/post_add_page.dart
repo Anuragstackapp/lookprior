@@ -56,7 +56,7 @@ class PostAddPageState extends State<PostAddPage> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.arrow_back_ios_new,
+                            icon: const Icon(Icons.arrow_back_ios_new,
                                 color: Colors.white)),
                       )),
                       Expanded(
@@ -82,7 +82,7 @@ class PostAddPageState extends State<PostAddPage> {
                 child: Container(
                   height: double.infinity,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),

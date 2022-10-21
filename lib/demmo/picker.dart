@@ -27,7 +27,7 @@ class _HomePageState extends State<DemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Country Pickers Demo'),
+        title: const Text('Country Pickers Demo'),
       ),
       body: ListView(
         padding: EdgeInsets.all(8.0),
@@ -151,9 +151,9 @@ class _HomePageState extends State<DemoPage> {
       itemBuilder: (Country country) {
         return Row(
           children: <Widget>[
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             CountryPickerUtils.getDefaultFlagImage(country),
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             Expanded(child: Text(country.name)),
           ],
         );

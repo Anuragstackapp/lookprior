@@ -25,31 +25,16 @@ void statusBarColor() {
 
 
 
-
-
-
-
-Widget facbookButton(){
-  return Padding(
-    padding: const EdgeInsets.only(left: 25,top: 10,right: 25),
-    child: CustomWidgets.socialButtonRect(
-        "Login with Facebook", ColorsResources.facbookButton, ImageResources.facebook,
-
-    ),
-  );
-}
-
 Widget appleButton(BuildContext context){
   return Padding(
     padding: const EdgeInsets.only(left: 25,top: 15,right: 25),
     child: CustomWidgets.socialButtonRect(
       onTap: () async {
         debugPrint("Done Google");
-        GoogleSign().signInGoogle().then((value) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-            return FirstPage();
-          },));
-        },);
+       await GoogleSign().signInGoogle();
+        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        //   return FirstPage();
+        // },));
 
       },
       "Login with Apple", ColorsResources.appleButton, ImageResources.apple,

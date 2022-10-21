@@ -221,7 +221,7 @@ class LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.only(top: 5),
                             child: divderrow(),
                           ),
-                          facbookButton(),
+                          loginScreenViewModel!.facbookButton(),
                           appleButton(context),
                           registerAccount(context),
 
