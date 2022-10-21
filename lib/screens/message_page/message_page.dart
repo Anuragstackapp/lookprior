@@ -31,6 +31,8 @@ class _MessagePageState extends State<MessagePage> {
             padding: const EdgeInsets.all(15.0),
             child: SvgPicture.asset(ImageResources.drawerIcon),
           )),
+
+
         title: Center(child: Padding(
           padding: const EdgeInsets.only(right: 40),
           child: Text("Messge"),
