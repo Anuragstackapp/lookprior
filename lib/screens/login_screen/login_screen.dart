@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/app/shared_preference.dart';
 import 'package:lookprior/common/widget/commane_scroll_behavior.dart';
 import 'package:lookprior/common/widget/widget.dart';
+import 'package:lookprior/screens/bootambar/bottambarpage.dart';
 import 'package:lookprior/screens/login_screen/login_screen_view_model.dart';
 import 'package:lookprior/screens/login_screen/login_screen_widget.dart';
 import 'package:lookprior/screens/register_screens/widget.dart';
@@ -176,7 +177,7 @@ class LoginScreenState extends State<LoginScreen> {
 
                                 String loginBodyrespose = await RestService.postRestMethods(endPoint: '/api/v1/data/signin', bodyParam: login);
 
-                                print("loginBodyespose --> ${loginBodyrespose}");
+                                print("loginBodyespose --> $loginBodyrespose");
                                 if(loginBodyrespose != null && loginBodyrespose.isNotEmpty){
                                   Map<String,dynamic> loginResponseMap = jsonDecode(loginBodyrespose);
                                   print("loginResponseMap ---> ${loginResponseMap.toString()}");
@@ -184,7 +185,8 @@ class LoginScreenState extends State<LoginScreen> {
                                   String accessTokan =  await "${loginResponseMap['access_token']}";
                                   print('_______>______________ $accessTokan');
 
-                                await SherdPref.setAccessTokan("access_token", "${loginResponseMap['access_token']}");
+                                  await SherdPref.setAccessTokan("access_token", "${loginResponseMap['access_token']}");
+
 
 
                                   loginScreenViewModel!.alertDilog(context,messge: loginResponseMap['Message']);
@@ -198,10 +200,8 @@ class LoginScreenState extends State<LoginScreen> {
                                     });
 
                                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                                      return FirstPage();
+                                      return BottambarPage();
                                     },));
-
-
 
                                   }
                                // else {

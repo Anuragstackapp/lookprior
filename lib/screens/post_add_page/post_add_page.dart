@@ -11,7 +11,6 @@ import 'package:lookprior/screens/video_player_page/video_player_page.dart';
 import '../../common/constant/image_const.dart';
 import '../../common/constant/string_const.dart';
 import '../../common/widget/commaneText.dart';
-import '../../common/widget/common_navigator.dart';
 import '../../common/widget/elevated_button.dart';
 
 class PostAddPage extends StatefulWidget {
@@ -56,7 +55,7 @@ class PostAddPageState extends State<PostAddPage> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: const Icon(Icons.arrow_back_ios_new,
+                            icon: const Icon(Icons.arrow_back,
                                 color: Colors.white)),
                       )),
                       Expanded(

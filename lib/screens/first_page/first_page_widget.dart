@@ -6,6 +6,7 @@ import 'package:lookprior/common/constant/color_const.dart';
 import 'package:lookprior/common/constant/image_const.dart';
 import 'package:lookprior/common/constant/string_const.dart';
 import 'package:lookprior/common/widget/elevated_button.dart';
+import 'package:lookprior/screens/get_data/get_user_data_model.dart';
 import 'package:lookprior/screens/login_screen/login_screen.dart';
 
 
@@ -142,14 +143,14 @@ Widget adsText(){
     ],),
   );
 }
-draweropen(BuildContext context) {
+draweropen(BuildContext context, {String? username}) {
   return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(60), bottomRight: Radius.circular(60)),
       ),
       child: ListView(children: [
-        Container(
+       username == null ? Container(
             height: 125,
             color: ColorsResources.registerScreen,
             child: InkWell(
@@ -172,30 +173,49 @@ draweropen(BuildContext context) {
                       ),
                     ),
                   ),
-                  const CommonText(
+                    CommonText(
                       text: StringResources.drawername,
                       fontSize: 14,
                       color: Colors.white,
                       fontWeight: FontWeight.w500),
-                  InkWell(
-                    onTap: () {
-
-
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 5),
-                      child: SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: SvgPicture.asset(
-                          ImageResources.arrowicon,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 5),
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: SvgPicture.asset(
+                        ImageResources.arrowicon,
                       ),
                     ),
                   ),
                 ],
               ),
-            )),
+            )) : Container(
+           height: 125,
+           color: ColorsResources.registerScreen,
+           child: InkWell(
+
+             child: Row(
+               children: [
+                 Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 30),
+                   child: SizedBox(
+                     height: 60,
+                     width: 60,
+                     child: SvgPicture.asset(
+                       ImageResources.userlogo,
+                     ),
+                   ),
+                 ),
+                 CommonText(
+                     text: username,
+                     fontSize: 14,
+                     color: Colors.white,
+                     fontWeight: FontWeight.w500),
+
+               ],
+             ),
+           )),
         const SizedBox(
           height: 15,
         ),

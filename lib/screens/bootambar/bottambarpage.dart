@@ -1,8 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lookprior/screens/get_data/get_user_data_model.dart';
+import 'package:lookprior/screens/login_screen/login_screen.dart';
 import 'package:lookprior/screens/profile_page/profile_page.dart';
+import 'package:lookprior/service/rest_service.dart';
 
+import '../../app/shared_preference.dart';
 import '../../common/constant/color_const.dart';
 import '../../common/constant/image_const.dart';
 import '../../common/widget/common_navigator.dart';
@@ -21,6 +25,10 @@ class BottambarPage extends StatefulWidget {
 
 class _BottambarPageState extends State<BottambarPage> {
   var _bottomNavIndex = 0;
+  dynamic tokan;
+  GetData? getData;
+  String? Username;
+
 
 
 
@@ -32,18 +40,42 @@ class _BottambarPageState extends State<BottambarPage> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserData();
+  }
+  Future<GetData?> getUserData() async {
+    tokan = await SherdPref.getAccessTokan();
+    print("User Dtata Tokan ==> $tokan");
+    dynamic userResponce = await GetRestService.getRestMethods(endPoint: '/api/v1/data/getprofiledetail', headers: {'Authorization':'Bearer $tokan'});
+    print('Rsponce == > $userResponce');
+
+        getData = await getDataFromJson(userResponce);
+        print("User My Data == > $getData");
+        if(getData!.success == true){
+
+          setState(() {
+            Username = getData!.userName;
+          });
+          print("User Name === > $Username");
+        }
+
+
+  }
+  @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
     List<Widget> navigator = [
       FirstPage(scaffoldState:scaffoldState),
       LikePage(scaffoldState:scaffoldState),
       MessagePage(scaffoldState:scaffoldState),
-      ProfilePage(scaffoldState:scaffoldState),
+     tokan != null ? ProfilePage(scaffoldState:scaffoldState) : const LoginScreen(),
     ];
 
     return Scaffold(
         key: scaffoldState,
-        drawer: draweropen(context),
+        drawer: draweropen(context,username: Username),
         resizeToAvoidBottomInset: false,
       body: navigator[_bottomNavIndex],
         floatingActionButton: FloatingActionButton(
@@ -79,6 +111,7 @@ class _BottambarPageState extends State<BottambarPage> {
             );
           },
           onTap: (index) {
+
             setState(() {
               _bottomNavIndex = index;
             });
@@ -90,56 +123,3 @@ class _BottambarPageState extends State<BottambarPage> {
 
 
 
-//
-// class HomePage extends StatefulWidget {
-//   @override
-//   _HomePageState createState() => _HomePageState();
-// }
-//
-// class _HomePageState extends State<HomePage> {
-//   int _pageIndex = 0;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return WillPopScope(
-//       onWillPop: () async => false,
-//       child: Scaffold(
-//         body: SafeArea(
-//           child: IndexedStack(
-//             index: _pageIndex,
-//
-//           ),
-//         ),
-//         bottomNavigationBar: BottomNavigationBar(
-//           type: BottomNavigationBarType.fixed,
-//           items: const <BottomNavigationBarItem>[
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.home),
-//               label: 'Home',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.business),
-//               label: 'Business',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.computer),
-//               label: 'Technology',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.book),
-//               label: 'Education',
-//             ),
-//           ],
-//           currentIndex: _pageIndex,
-//           onTap: (int index) {
-//             setState(
-//                   () {
-//                 _pageIndex = index;
-//               },
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }

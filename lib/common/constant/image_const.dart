@@ -82,5 +82,13 @@ class ImageResources{
   static const editicon = '${images}Edit.svg';
   static const profileuser = '${images}profileuser.png';
 
+  static const recordPhone = '${images}Record it with your phone.png';
+  static const takePhoto = '${images}Take a photo of it.png';
+  static const meetBuyers = '${images}Meet Buyers.png';
+  static const makeMoney = '${images}Make Money.png';
+
+
+
+
 
 }

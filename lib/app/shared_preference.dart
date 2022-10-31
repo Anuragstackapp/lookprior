@@ -1,13 +1,21 @@
-import 'dart:ffi';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SherdPref{
+  // ignore: non_constant_identifier_names
   static Future<void> setAccessTokan(String Key,String value) async {
      final prefs = await SharedPreferences.getInstance();
-     await prefs.setString("$Key", "$value");
+     await prefs.setString(Key, value);
 
      print("Anurag Value ==> $value");
+  }
+
+  static Future<String?>? getAccessTokan() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? action = await prefs.getString('access_token');
+
+    print("Get Acsses Tokan ---> $action");
+
+    return action;
   }
 
 }
