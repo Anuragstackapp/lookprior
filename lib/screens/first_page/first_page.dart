@@ -7,6 +7,7 @@ import 'package:lookprior/screens/first_page/first_page_view_model.dart';
 import 'package:lookprior/screens/first_page/first_page_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:lookprior/screens/location_page/location_page.dart';
+import '../../app/shared_preference.dart';
 import '../../common/constant/color_const.dart';
 import '../../common/constant/image_const.dart';
 import '../../common/constant/string_const.dart';
@@ -30,6 +31,8 @@ class FirstPageState extends State<FirstPage> {
 
   late Audio audio;
   bool catecoryCheck = false;
+  dynamic tokan;
+
   List<String> adsimg = [
     ImageResources.bmw,
     ImageResources.pc,
@@ -68,13 +71,21 @@ class FirstPageState extends State<FirstPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 0),
-      () {
-        alertDilog(context);
-      },
-    );
+   dialogOpen();
     categoryData();
+  }
+
+
+ void dialogOpen() async {
+
+   tokan = await SherdPref.getAccessTokan();
+
+   if(tokan == null){
+     await Future.delayed(const Duration(seconds: 3));
+     // ignore: use_build_context_synchronously
+     alertDilog(context);
+   }
+   return null;
   }
 
   void categoryData() async {

@@ -187,11 +187,7 @@ class LoginScreenState extends State<LoginScreen> {
 
                                   await SherdPref.setAccessTokan("access_token", "${loginResponseMap['access_token']}");
 
-
-
                                   loginScreenViewModel!.alertDilog(context,messge: loginResponseMap['Message']);
-
-
 
 
                                   if(loginResponseMap.containsKey('Success') && loginResponseMap['Success']){

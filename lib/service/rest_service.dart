@@ -6,13 +6,13 @@ class RestService{
  static const String baseUrl = 'https://lookprstage.com/admin/';
  static const String signUpeApi = '/api/v1/data/signup';
 
- static dynamic postRestMethods({@ required String? endPoint, @ required Map<String, dynamic>? bodyParam}) async {
+ static dynamic postRestMethods({@ required String? endPoint, @ required Map<String, dynamic>? bodyParam,Map<String, String>? headers}) async {
 
   try {
     String url = "${baseUrl}${endPoint}";
     print(url);
 
-    Response response = await http.post(Uri.parse(url),body: bodyParam);
+    Response response = await http.post(Uri.parse(url),body: bodyParam,headers: headers);
     print('statusCode --> ${response.statusCode}');
 
     

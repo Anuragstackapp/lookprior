@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lookprior/screens/password_chang_page/password_change_page.dart';
+import 'package:lookprior/screens/profile_edit_page/profile_edit_page.dart';
 import 'package:lookprior/screens/splash_screens/splash_screen.dart';
 
 
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
         home: SplashScreen(),
         debugShowCheckedModeBanner: false,
 
-
+        //
       ),
     );
   }

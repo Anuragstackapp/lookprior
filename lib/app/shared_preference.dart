@@ -18,5 +18,12 @@ class SherdPref{
     return action;
   }
 
+  static Future<bool> removeAccessTokan() async {
+    final prefs = await SharedPreferences.getInstance();
+    final success = await prefs.remove('access_token');
+
+    return success;
+  }
+
 }
 
