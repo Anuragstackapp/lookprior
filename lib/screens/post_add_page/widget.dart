@@ -1,9 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lookprior/common/constant/color_const.dart';
 import 'package:lookprior/screens/post_add_page/post_add_page.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
@@ -206,9 +206,23 @@ class PostAddPageViewModel {
 
   }
 
+  Future<bool?>  showToastMessage(message, color)
+  {
+    return Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: color,
+        textColor:  Colors.white,
+        fontSize: 16.0
+    );
+  }
 
 
- Future<String?> videoThumbnail(int index) async {
+
+
+  Future<String?> videoThumbnail(int index) async {
     final fileName = await VideoThumbnail.thumbnailFile(
       video: postAddPageState.videopath[index]!.path,
       imageFormat: ImageFormat.JPEG,

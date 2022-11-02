@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lookprior/common/constant/color_const.dart';
+import 'package:lookprior/screens/post_add_page/post_your_ad/post_your_ad_description.dart';
 import 'package:lookprior/screens/post_add_page/widget.dart';
 import 'package:lookprior/screens/video_player_page/image_view.dart';
 import 'package:lookprior/screens/video_player_page/video_player_page.dart';
@@ -31,6 +32,14 @@ class PostAddPageState extends State<PostAddPage> {
     super.initState();
   }
 
+  Future<bool> goback(){
+
+    Navigator.pop(context,false);
+
+    // ignore: null_argument_to_non_null_type
+    return Future.value();
+  }
+
   @override
   Widget build(BuildContext context) {
     postAddPageViewModel ?? (postAddPageViewModel = PostAddPageViewModel(this));
@@ -45,7 +54,7 @@ class PostAddPageState extends State<PostAddPage> {
             Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Row(
                     children: [
                       Expanded(
@@ -340,22 +349,22 @@ class PostAddPageState extends State<PostAddPage> {
                                                                           .only(
                                                                       left: 5,
                                                                       right: 5),
-                                                                  child: InkWell(
-                                                                      onTap:
-                                                                          () {
-                                                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                                          return ImageViewPage(photoPath[index]!.path);
-                                                                        },));
+                                                                  child:
+                                                                      InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            Navigator.push(context,
+                                                                                MaterialPageRoute(
+                                                                              builder: (context) {
+                                                                                return ImageViewPage(photoPath[index]!.path);
+                                                                              },
+                                                                            ));
                                                                           },
-                                                                      child: Image(
-                                                                          image: FileImage(File(photoPath[index]!
-                                                                              .path)),
-                                                                          height:
-                                                                              100,
-                                                                          width:
-                                                                              80,
-                                                                          fit: BoxFit
-                                                                              .fill)),
+                                                                          child: Image(
+                                                                              image: FileImage(File(photoPath[index]!.path)),
+                                                                              height: 100,
+                                                                              width: 80,
+                                                                              fit: BoxFit.fill)),
                                                                 ),
                                                                 Align(
                                                                   alignment:
@@ -369,7 +378,8 @@ class PostAddPageState extends State<PostAddPage> {
                                                                               .removeAt(index);
                                                                         });
                                                                       },
-                                                                      icon: Icon(Icons.remove_circle),color: Colors.red),
+                                                                      icon: Icon(Icons.remove_circle),
+                                                                      color: Colors.red),
                                                                 )
                                                               ]),
                                                             ],
@@ -425,10 +435,114 @@ class PostAddPageState extends State<PostAddPage> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.only(
+                                top: 10, bottom: 10, right: 30, left: 30),
                             child: CommonElevatedButton(
+                              borderRadius: 9,
                               onPressed: () {
-                                setState(() {});
+
+                                if(videopath.isNotEmpty && photoPath.isNotEmpty){
+
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    // ignore: prefer_const_constructors
+                                    return PostYourAdDescription(videopath,photoPath);
+                                  },));
+                                } else if (videopath.isEmpty && photoPath.isEmpty) {
+                                  postAddPageViewModel!.showToastMessage(
+                                      'Please add at least one media file',
+                                      ColorsResources.registerScreen);
+                                } else if (videopath.isEmpty) {
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return WillPopScope(
+                                        onWillPop: () async => false,
+                                        child: AlertDialog(
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                          title: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Image.asset(
+                                                ImageResources.videoUploderror),
+                                          ),
+                                          content: Text(
+                                              "Are you sure you don't want to add a video to attract more viewers?",
+                                              overflow: TextOverflow.fade,
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black,
+                                              )),
+                                          actions: [
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 20,right: 5),
+                                                    child: Align(
+                                                      alignment: Alignment.bottomLeft,
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(context);
+                                                          postAddPageViewModel!.showModelButtomsSheetVideo(context);
+                                                        },
+                                                        style: ElevatedButton.styleFrom(
+                                                          backgroundColor: ColorsResources
+                                                              .registerScreen,
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius.circular(
+                                                                  8)),
+                                                        ),
+                                                        child: Text(
+                                                          "Add Video",
+                                                          style: GoogleFonts.poppins(
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.white),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(right: 20,left: 5),
+                                                    child: Align(
+                                                      alignment: Alignment.bottomRight,
+                                                      child: OutlinedButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(context);
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                            // ignore: prefer_const_constructors
+                                                            return PostYourAdDescription(videopath,photoPath);
+                                                          },));
+                                                        },
+                                                        style: OutlinedButton.styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius.circular(8),
+                                                              side: BorderSide(
+                                                                  color: ColorsResources
+                                                                      .registerScreen)),
+                                                        ),
+                                                        child: Text(
+                                                          "Continue",
+                                                          style: GoogleFonts.poppins(
+                                                              fontWeight: FontWeight.w400,
+                                                              color: ColorsResources
+                                                                  .registerScreen),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }
                               },
                               buttonColor: ColorsResources.registerScreen,
                               textSize: 16,

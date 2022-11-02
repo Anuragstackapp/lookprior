@@ -88,6 +88,9 @@ class ImageResources{
   static const makeMoney = '${images}Make Money.png';
 
 
+  static const videoUploderror = '${images}video_uplod_error_image.png';
+
+
 
 
 

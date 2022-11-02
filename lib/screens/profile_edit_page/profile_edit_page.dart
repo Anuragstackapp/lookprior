@@ -451,12 +451,12 @@ class ProfileEditPageState extends State<ProfileEditPage> {
                           ]),
 
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 10),
                       ],
                     ),
                   ),
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.topCenter,
                   child: CircleAvatar(
                     radius: 50.0,

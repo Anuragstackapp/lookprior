@@ -55,6 +55,8 @@ dependencies:
   flutter_facebook_auth: ^4.4.1+1
   getwidget: ^3.0.1
   scroll_app_bar: ^2.0.0
+  fluttertoast: ^8.1.1
+  google_places_flutter: ^2.0.5
 
 dev_dependencies:
   flutter_test:

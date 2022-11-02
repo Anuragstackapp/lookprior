@@ -60,8 +60,6 @@ class _BottambarPageState extends State<BottambarPage> {
           });
           print("User Name === > $Username");
         }
-
-
   }
   @override
   Widget build(BuildContext context) {
