@@ -447,6 +447,11 @@ class PostAddPageState extends State<PostAddPage> {
                                     // ignore: prefer_const_constructors
                                     return PostYourAdDescription(videopath,photoPath);
                                   },));
+                                }else if(photoPath.isEmpty && videopath.isNotEmpty){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    // ignore: prefer_const_constructors
+                                    return PostYourAdDescription(videopath,photoPath);
+                                  },));
                                 } else if (videopath.isEmpty && photoPath.isEmpty) {
                                   postAddPageViewModel!.showToastMessage(
                                       'Please add at least one media file',

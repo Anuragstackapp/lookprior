@@ -90,7 +90,8 @@ class ImageResources{
 
   static const videoUploderror = '${images}video_uplod_error_image.png';
 
-
+  static const similerAds = '${images}No_Similar_ads.png';
+  static const demoPostAdsView = '${images}demo_post_view.png';
 
 
 

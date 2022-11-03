@@ -17,7 +17,10 @@ import '../message_page/message_page.dart';
 import '../post_add_page/post_add_page.dart';
 
 class BottambarPage extends StatefulWidget {
-  const BottambarPage({Key? key}) : super(key: key);
+  int? i;
+  BottambarPage({this.i});
+
+
 
   @override
   State<BottambarPage> createState() => _BottambarPageState();
@@ -28,7 +31,7 @@ class _BottambarPageState extends State<BottambarPage> {
   dynamic tokan;
   GetData? getData;
   String? Username;
-
+  bool pagech = false;
 
 
 
@@ -44,9 +47,24 @@ class _BottambarPageState extends State<BottambarPage> {
     // TODO: implement initState
     super.initState();
     getUserData();
+
   }
   Future<GetData?> getUserData() async {
+
+    if(widget.i != null){
+      _bottomNavIndex = widget.i!;
+    }
+
     tokan = await SherdPref.getAccessTokan();
+    if(tokan != null){
+      setState(() {
+        pagech = true;
+      });
+    }else{
+      setState(() {
+        pagech = false;
+      });
+    }
     print("User Dtata Tokan ==> $tokan");
     dynamic userResponce = await GetRestService.getRestMethods(endPoint: '/api/v1/data/getprofiledetail', headers: {'Authorization':'Bearer $tokan'});
     print('Rsponce == > $userResponce');
@@ -68,7 +86,7 @@ class _BottambarPageState extends State<BottambarPage> {
       FirstPage(scaffoldState:scaffoldState),
       LikePage(scaffoldState:scaffoldState),
       MessagePage(scaffoldState:scaffoldState),
-     tokan != null ? ProfilePage(scaffoldState:scaffoldState) : const LoginScreen(),
+     pagech ? ProfilePage(scaffoldState:scaffoldState) : const LoginScreen(),
     ];
 
     return Scaffold(
@@ -109,6 +127,7 @@ class _BottambarPageState extends State<BottambarPage> {
             );
           },
           onTap: (index) {
+
 
             setState(() {
               _bottomNavIndex = index;

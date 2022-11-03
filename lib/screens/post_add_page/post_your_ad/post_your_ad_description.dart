@@ -345,7 +345,7 @@ class PostYourAdDescriptionState extends State<PostYourAdDescription> {
                        padding: const EdgeInsets.only(
                            top: 30, bottom: 30, right: 50, left: 50),
                        child: CommonElevatedButton(
-                         onPressed: () => postYourAdViewModel!.submitButton(),
+                         onPressed: () => postYourAdViewModel!.submitButton(context: context),
                          borderRadius: 9,
                          buttonColor: ColorsResources.registerScreen,
                          textSize: 16,
@@ -358,7 +358,7 @@ class PostYourAdDescriptionState extends State<PostYourAdDescription> {
                ),
              ),
            ),
-           postYourAdViewModel!.status ? Center(child: CircularProgressIndicator(color: ColorsResources.registerScreen,)) : SizedBox(),
+           postYourAdViewModel!.status ? Center(child: CircularProgressIndicator(color: ColorsResources.registerScreen,)) : const SizedBox(),
          ],
         ),
       ),

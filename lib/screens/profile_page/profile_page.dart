@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/screens/password_chang_page/password_change_page.dart';
 import 'package:lookprior/screens/profile_edit_page/profile_edit_page.dart';
+import 'package:lookprior/screens/profile_page/post_ad_view_page/post_ad_view_page.dart';
 import 'package:lookprior/screens/profile_page/post_help_page/post_help_page.dart';
+import 'package:lookprior/screens/profile_page/profile_page_view_model.dart';
 
 import '../../app/shared_preference.dart';
 import '../../common/constant/color_const.dart';
@@ -13,8 +15,6 @@ import '../../service/rest_service.dart';
 import '../bootambar/bottambarpage.dart';
 import '../get_data/get_user_data_model.dart';
 
-
-
 // ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
   GlobalKey<ScaffoldState>? scaffoldState;
@@ -22,18 +22,20 @@ class ProfilePage extends StatefulWidget {
   ProfilePage({super.key, this.scaffoldState});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfilePage> createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class ProfilePageState extends State<ProfilePage> {
   final Widget svg = SvgPicture.asset(ImageResources.profileuser);
   bool statusPgae = false;
   dynamic tokan;
   GetData? getData;
+
   // ignore: non_constant_identifier_names
   String? Username;
   bool user = false;
 
+  ProfilePageViewModel? profilePageViewModel;
 
   @override
   void initState() {
@@ -65,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<bool> goback() {
     Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) {
-        return const BottambarPage();
+        return  BottambarPage();
       },
     ));
 
@@ -75,11 +77,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    profilePageViewModel = (profilePageViewModel ?? ProfilePageViewModel(this));
+
     return user
         ? WillPopScope(
             onWillPop: goback,
             child: Scaffold(
-              backgroundColor: ColorsResources.registerScreen,
+              backgroundColor: Colors.white,
               appBar: AppBar(
                 backgroundColor: ColorsResources.registerScreen,
                 elevation: 0,
@@ -106,9 +110,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         const EdgeInsets.only(top: 15, left: 15, bottom: 15),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return ProfileEditPage();
-                        },));
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const ProfileEditPage();
+                          },
+                        ));
                       },
                       child: SvgPicture.asset(ImageResources.editicon,
                           height: 37, width: 20),
@@ -138,34 +144,57 @@ class _ProfilePageState extends State<ProfilePage> {
                                           Navigator.pop(context);
                                           showDialog(
                                             barrierDismissible: false,
-                                            context: context, builder: (context) {
-                                            return AlertDialog(
-                                              content: Text("Are you sure you want to log out?",
-                                                  overflow: TextOverflow.fade,
-                                                  style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                              )),
-                                              actions: [
-                                                TextButton(onPressed: () async {
-                                                  await SherdPref.removeAccessTokan();
-                                                  // ignore: use_build_context_synchronously
-                                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                                                    return const BottambarPage();
-                                                  },));
-                                                }, child: Text("Yes",style: GoogleFonts.poppins(
-                                                  color: ColorsResources.registerScreen,
-                                                  fontWeight: FontWeight.w400
-                                                ),)),
-                                                TextButton(onPressed: () {
-                                                  Navigator.pop(context);
-                                                }, child: Text("No",style: GoogleFonts.poppins(
-                                                    color: ColorsResources.registerScreen,
-                                                    fontWeight: FontWeight.w400
-                                                ),)),
-                                              ],
-                                            );
-                                          },);
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                content: Text(
+                                                    "Are you sure you want to log out?",
+                                                    overflow: TextOverflow.fade,
+                                                    style: GoogleFonts.poppins(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    )),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        await SherdPref
+                                                            .removeAccessTokan();
+                                                        // ignore: use_build_context_synchronously
+                                                        Navigator.pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return  BottambarPage();
+                                                          },
+                                                        ));
+                                                      },
+                                                      child: Text(
+                                                        "Yes",
+                                                        style: GoogleFonts.poppins(
+                                                            color: ColorsResources
+                                                                .registerScreen,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      )),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text(
+                                                        "No",
+                                                        style: GoogleFonts.poppins(
+                                                            color: ColorsResources
+                                                                .registerScreen,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      )),
+                                                ],
+                                              );
+                                            },
+                                          );
                                         },
                                         child: const CommonText(
                                           text: 'Logout',
@@ -178,10 +207,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                       InkWell(
                                         onTap: () async {
                                           Navigator.pop(context);
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                          return const PasswordChangPage();
-                                        },));
-
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return const PasswordChangPage();
+                                            },
+                                          ));
                                         },
                                         child: const CommonText(
                                           text: 'Change Password',
@@ -207,188 +238,352 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               body: statusPgae
                   ? PostHelpPage()
-                  : Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: ColorsResources.registerScreen,
-                      child: Stack(
-                        children: [
-                          Align(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 60),
-                              child: Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30)),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 35),
-                                      child: Text("${getData!.userName}",
-                                          style: GoogleFonts.poppins(
-                                              fontWeight: FontWeight.w500)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: Text("Owner",
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.grey,
-                                          )),
-                                    ),
-                                    SizedBox(
+                  : Stack(
+                      children: [
+                        Container(
+                          height: 200,
+                          width: double.infinity,
+                          color: ColorsResources.registerScreen,
+                        ),
+                        ListView(
+                          children: [
+                            Stack(
+                              children: [
+                                Align(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 60),
+                                    child: Container(
                                       width: double.infinity,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Card(
-                                          elevation: 4,
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 45,
-                                                    right: 45,
-                                                    top: 30),
-                                                child: ElevatedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(Colors
-                                                                  .deepPurple),
-                                                      shape: MaterialStateProperty.all(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8))),
-                                                    ),
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        statusPgae = true;
-                                                      });
-                                                    },
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: const [
-                                                        Icon(Icons.upload),
-                                                        SizedBox(width: 4),
-                                                        Text("Post an Ad")
-                                                      ],
-                                                    )),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 45,
-                                                    right: 45,
-                                                    top: 10),
-                                                child: OutlinedButton(
-                                                    style: OutlinedButton
-                                                        .styleFrom(
-                                                      side: const BorderSide(
-                                                          color: Colors
-                                                              .deepPurple),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.pushReplacement(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                        builder: (context) {
-                                                          return const BottambarPage();
-                                                        },
-                                                      ));
-                                                    },
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        const Icon(Icons.search,
-                                                            color:
-                                                                Colors.black),
-                                                        const SizedBox(width: 4),
-                                                        Text(
-                                                          "Browse",
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                            color: Colors.black,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 45,
-                                                    right: 45,
-                                                    top: 10,
-                                                    bottom: 25),
-                                                child: ElevatedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(ColorsResources
-                                                                  .registerScreen),
-                                                      shape: MaterialStateProperty.all(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8))),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: const [
-                                                        Icon(Icons
-                                                            .add_business_outlined),
-                                                        SizedBox(width: 4),
-                                                        Text("Add a Business")
-                                                      ],
-                                                    )),
-                                              ),
-                                            ],
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(30),
+                                            topRight: Radius.circular(30)),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 35),
+                                            child: Text("${getData!.userName}",
+                                                style: GoogleFonts.poppins(
+                                                    fontWeight:
+                                                        FontWeight.w500)),
                                           ),
-                                        ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 3),
+                                            child: Text("Owner",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.grey,
+                                                )),
+                                          ),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Card(
+                                                elevation: 4,
+                                                child:
+                                                    profilePageViewModel!
+                                                            .adsStatus
+                                                        ? Column(
+                                                            children: [
+                                                              ListView.builder(
+                                                                shrinkWrap:
+                                                                    true,
+                                                                physics:
+                                                                    const ClampingScrollPhysics(),
+                                                                itemCount: profilePageViewModel!.getAds!.filteredAddList!.length,
+                                                                itemBuilder:
+                                                                    (context, index) {
+                                                                  return Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            10,
+                                                                        right:
+                                                                            10,
+                                                                        top:
+                                                                            10),
+                                                                    child:
+                                                                        SizedBox(
+                                                                      height:
+                                                                          80,
+                                                                      child:
+                                                                          InkWell(
+                                                                            onTap: () {
+                                                                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                                                return const PostAdViewPage();
+                                                                              },));
+                                                                            },
+                                                                            child: Card(
+                                                                        child:
+                                                                              Row(
+                                                                            children: [
+                                                                              profilePageViewModel!.getAds!.filteredAddList![index].adImageThumb!.isNotEmpty
+                                                                                  ? Padding(
+                                                                                      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+                                                                                      child: Container(
+                                                                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), image: DecorationImage(image: NetworkImage("${profilePageViewModel!.getAds!.filteredAddList![index].adImageThumb}"), fit: BoxFit.fill)),
+                                                                                        height: 70,
+                                                                                        width: 70,
+                                                                                      ),
+                                                                                    )
+                                                                                  : Padding(
+                                                                                      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+                                                                                      child: Container(
+                                                                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), image: DecorationImage(image: NetworkImage("${profilePageViewModel!.getAds!.filteredAddList![index].adVideoThumb}"), fit: BoxFit.fill)),
+                                                                                        height: 70,
+                                                                                        width: 70,
+                                                                                      ),
+                                                                                    ),
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.only(left: 10),
+                                                                                child: SizedBox(
+
+                                                                                  child: Column(
+                                                                                    children:  [
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.only(top: 10),
+                                                                                        child: Text("${profilePageViewModel!.getAds!.filteredAddList![index].title}",overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(
+                                                                                          color: Colors.black,
+                                                                                          fontWeight: FontWeight.w500,
+                                                                                          fontSize: 11
+                                                                                        )),
+                                                                                      ),
+
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.only(top: 4),
+                                                                                        child: Text("\$${profilePageViewModel!.getAds!.filteredAddList![index].amount}",overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(
+                                                                                            color: Colors.black,
+                                                                                            fontSize: 11
+                                                                                        )),
+                                                                                      ),
+
+
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              const Spacer(),
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.only(right: 10),
+                                                                                child: Container(
+                                                                                  height: 27,
+                                                                                  alignment: Alignment.center,
+                                                                                  decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(6)),
+                                                                                  child: Container(
+                                                                                      alignment: Alignment.center,
+                                                                                      width: 90,
+                                                                                      child: SvgPicture.asset(
+                                                                                        ImageResources.share,
+                                                                                        height: 40,
+                                                                                      )),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                        ),
+                                                                      ),
+                                                                          ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ),
+                                                              profilePageViewModel!
+                                                                      .animatinloder
+                                                                  ? Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          top:
+                                                                              5),
+                                                                      child: CircularProgressIndicator(
+                                                                          color:
+                                                                              ColorsResources.registerScreen),
+                                                                    )
+                                                                  : const SizedBox(),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        bottom:
+                                                                            15),
+                                                                child:
+                                                                    TextButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            profilePageViewModel!.animatinloder =
+                                                                                true;
+                                                                            profilePageViewModel!.i =
+                                                                                profilePageViewModel!.i + 10;
+                                                                          });
+                                                                          profilePageViewModel!
+                                                                              .getUserAds()
+                                                                              .then(
+                                                                            (value) {
+                                                                              setState(() {
+                                                                                profilePageViewModel!.animatinloder = false;
+                                                                              });
+                                                                            },
+                                                                          );
+                                                                        },
+                                                                        child:
+                                                                            Text(
+                                                                          "view all",
+                                                                          style:
+                                                                              GoogleFonts.poppins(color: ColorsResources.registerScreen),
+                                                                        )),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : Column(
+                                                            children: [
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(
+                                                                        left: 45,
+                                                                        right: 45, top: 30),
+                                                                child: ElevatedButton(
+                                                                        style: ButtonStyle(
+                                                                          backgroundColor:
+                                                                              MaterialStateProperty.all(Colors.deepPurple),
+                                                                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            statusPgae = true;
+                                                                          });
+                                                                        },
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: const [
+                                                                            Icon(Icons.upload),
+                                                                            SizedBox(width: 4),
+                                                                            Text("Post an Ad")
+                                                                          ],
+                                                                        )),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            45,
+                                                                        right:
+                                                                            45,
+                                                                        top:
+                                                                            10),
+                                                                child:
+                                                                    OutlinedButton(
+                                                                        style: OutlinedButton
+                                                                            .styleFrom(
+                                                                          side:
+                                                                              const BorderSide(color: Colors.deepPurple),
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8),
+                                                                          ),
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.pushReplacement(
+                                                                              context,
+                                                                              MaterialPageRoute(
+                                                                            builder:
+                                                                                (context) {
+                                                                              return  BottambarPage();
+                                                                            },
+                                                                          ));
+                                                                        },
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: [
+                                                                            const Icon(Icons.search,
+                                                                                color: Colors.black),
+                                                                            const SizedBox(width: 4),
+                                                                            Text(
+                                                                              "Browse",
+                                                                              style: GoogleFonts.poppins(
+                                                                                color: Colors.black,
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        )),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            45,
+                                                                        right:
+                                                                            45,
+                                                                        top: 10,
+                                                                        bottom:
+                                                                            25),
+                                                                child:
+                                                                    ElevatedButton(
+                                                                        style:
+                                                                            ButtonStyle(
+                                                                          backgroundColor:
+                                                                              MaterialStateProperty.all(ColorsResources.registerScreen),
+                                                                          shape:
+                                                                              MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: const [
+                                                                            Icon(Icons.add_business_outlined),
+                                                                            SizedBox(width: 4),
+                                                                            Text("Add a Business")
+                                                                          ],
+                                                                        )),
+                                                              ),
+                                                            ],
+                                                          ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                          const Align(
-                            alignment: Alignment.topCenter,
-                            child: CircleAvatar(
-                              radius: 50.0,
-                              backgroundColor: Colors.white,
-                              backgroundImage: AssetImage(
-                                ImageResources.profileuser,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                                const Align(
+                                  alignment: Alignment.topCenter,
+                                  child: CircleAvatar(
+                                    radius: 50.0,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: AssetImage(
+                                      ImageResources.profileuser,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
                     ),
             ))
         : Container(
-      color: Colors.transparent,
-          child: Center(
-              child: CircularProgressIndicator(
-                  color: ColorsResources.registerScreen)),
-        );
+            color: Colors.transparent,
+            child: Center(
+                child: CircularProgressIndicator(
+                    color: ColorsResources.registerScreen)),
+          );
   }
 }

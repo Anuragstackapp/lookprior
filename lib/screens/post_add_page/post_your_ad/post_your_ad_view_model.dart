@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lookprior/common/constant/color_const.dart';
 import 'package:lookprior/screens/post_add_page/post_your_ad/post_your_ad_description.dart';
+import 'package:lookprior/screens/profile_page/profile_page.dart';
 import '../../../app/shared_preference.dart';
 import 'package:http/http.dart' as http;
+
+import '../../bootambar/bottambarpage.dart';
 
 class PostYourAdViewModel{
 
@@ -28,7 +31,7 @@ class PostYourAdViewModel{
         fontSize: 16.0
     );
   }
-  submitButton() async {
+  submitButton({BuildContext? context}) async {
     tokan = await SherdPref.getAccessTokan();
     if(postYourAdDescriptionState.title.text.isEmpty){
       showToastMessage('Please Add Title', ColorsResources.registerScreen);
@@ -54,11 +57,11 @@ class PostYourAdViewModel{
           'servicePackId': '',
           'totalExposureDays': '',
           'perDayExposurePrice': '',
-          'title': '${postYourAdDescriptionState.title}',
+          'title': postYourAdDescriptionState.title.text,
           'cityName': 'Surat',
           'stateName': 'Gujarat',
-          'description': '${postYourAdDescriptionState.description}',
-          'amount': '${postYourAdDescriptionState.amount}',
+          'description': postYourAdDescriptionState.description.text,
+          'amount': postYourAdDescriptionState.amount.text,
           'addType': '1',
           'categoryId': '1',
           'subCategoryId': '1',
@@ -102,6 +105,9 @@ class PostYourAdViewModel{
             postYourAdDescriptionState.setState(() {
 
             });
+            Navigator.pushReplacement(context!, MaterialPageRoute(builder: (context) {
+              return BottambarPage(i:3);
+            },));
             showToastMessage('${responseMaps['Message']}', ColorsResources.registerScreen);
 
           }else{
