@@ -9,10 +9,11 @@ import '../../../common/widget/elevated_button.dart';
 
 
 
+// ignore: must_be_immutable
 class PostYourAdDescription extends StatefulWidget {
   List<XFile?> videopath;
   List<XFile?> photoPath;
-  PostYourAdDescription(this.videopath,this.photoPath);
+  PostYourAdDescription(this.videopath,this.photoPath, {super.key});
 
 
 
@@ -364,6 +365,8 @@ class PostYourAdDescriptionState extends State<PostYourAdDescription> {
       ),
     );
   }
+
+
 
 
 

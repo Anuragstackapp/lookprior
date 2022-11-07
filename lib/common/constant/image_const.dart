@@ -93,6 +93,8 @@ class ImageResources{
   static const similerAds = '${images}No_Similar_ads.png';
   static const demoPostAdsView = '${images}demo_post_view.png';
 
+  static const removeVideoIcon = '${images}Remove_Video.png';
+
 
 
 }

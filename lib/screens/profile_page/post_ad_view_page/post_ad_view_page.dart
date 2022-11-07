@@ -4,8 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/common/constant/image_const.dart';
 import 'package:lookprior/common/widget/commane_scroll_behavior.dart';
 import 'package:lookprior/screens/profile_page/post_ad_view_page/post_ad_view_page_view_model.dart';
+import 'package:lookprior/screens/profile_page/post_ad_view_page/video_player/image_view.dart';
+import 'package:lookprior/screens/profile_page/post_ad_view_page/video_player/video_player.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../common/constant/color_const.dart';
 
+// ignore: must_be_immutable
 class PostAdViewPage extends StatefulWidget {
   num? broadCastId;
   num? adDetailid;
@@ -76,16 +80,34 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                             controller: postAdViewPageViewModel!.pageController,
                             itemCount: postAdViewPageViewModel!.videoAndImageLink.length,
                             itemBuilder: (context, index) {
-                              return   postAdViewPageViewModel!.videoAndImageLink[index].containsKey("video") ? Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["video"]}"),fit: BoxFit.fill,),
+                              return   postAdViewPageViewModel!.videoAndImageLink[index].containsKey("video") ? InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    return VideoPlayerNetwork(videoAndImageLink:postAdViewPageViewModel!.videoAndImageLink[index]["videoLink"]);
+                                  },));
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["video"]}"),fit: BoxFit.fill,),
+                                  ),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(bottom: 50),
+                                      child: IconButton(onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                          return VideoPlayerNetwork(videoAndImageLink:postAdViewPageViewModel!.videoAndImageLink[index]["videoLink"]);
+                                        },));
+                                      }, icon: const Icon(Icons.play_circle_fill_rounded,color: Colors.white,size: 50,)),
+                                    ),
+                                  ),
                                 ),
-                                child: Center(
-                                  child: IconButton(onPressed: () {
+                              ) : InkWell(onTap: () {
 
-                                  }, icon: const Icon(Icons.play_circle_fill_rounded,color: Colors.white,size: 30,)),
-                                ),
-                              ) : Container(decoration: BoxDecoration(image: DecorationImage(image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["image"]}"))),);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return ImageViewAds(videoAndImageLink: postAdViewPageViewModel!.videoAndImageLink[index]["image"]);
+                                },));
+
+                              },child: Container(decoration: BoxDecoration(image: DecorationImage(image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["image"]}"),fit: BoxFit.fill)),));
                           },),
                         ),
 
@@ -121,20 +143,46 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                                       color: Colors.white,
                                       size: 20),
                                   onSelected: (value) {
-                                   value = postAdViewPageViewModel!.deleteAds(context);
+
                                   },
                                   itemBuilder: (BuildContext bc) {
-                                    return const [
+                                    return  [
                                       PopupMenuItem(
+                                        onTap: () {
+
+                                        },
                                         value: '/hello',
-                                        child: Text("Edit"),
+                                        child: const Text("Edit"),
                                       ),
                                       PopupMenuItem(
+                                        onTap: () {
+                                          postAdViewPageViewModel!.deleteAds(context);
+                                        },
                                         value: '/about',
-                                        child: Text("Delate"),
+                                        child: const Text("Delate"),
                                       ),
                                     ];
                                   },
+                                )),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 160),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: SmoothPageIndicator(
+                                controller: postAdViewPageViewModel!.pageController,
+                                count: postAdViewPageViewModel!.videoAndImageLink.length,
+                                effect: const ScrollingDotsEffect(
+                                  activeStrokeWidth: 2.6,
+                                  activeDotColor: Colors.white,
+
+                                  activeDotScale: 1.5,
+                                  maxVisibleDots: 5,
+                                  radius: 8,
+                                  spacing: 10,
+                                  dotHeight: 8,
+                                  dotWidth: 8,
                                 )),
                           ),
                         ),
@@ -239,7 +287,7 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                                                 postAdViewPageViewModel!.pageController.jumpToPage(postAdViewPageViewModel!.cnt);
                                               });
                                             },
-                                            child: Container(
+                                            child:postAdViewPageViewModel!.videoAndImageLink[index].containsKey("image") ? Container(
                                               height: 60,
                                               width: 75,
                                               decoration: BoxDecoration(
@@ -249,7 +297,19 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                                                       Radius.circular(
                                                           5)),
                                                   image: DecorationImage(
-                                                      image: NetworkImage(postAdViewPageViewModel!.videoAndImageLink[index].containsKey("image") ?  "${postAdViewPageViewModel!.videoAndImageLink[index]["image"]}" : "${postAdViewPageViewModel!.videoAndImageLink[index]["video"]}"), fit: BoxFit.fill)),
+                                                      image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["image"]}"), fit: BoxFit.fill)),
+                                            ) : Container(
+                                              height: 60,
+                                              width: 75,
+                                              child: Icon(Icons.play_circle_fill_rounded,color: Colors.white,size: 30,),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(
+                                                          5)),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["video"]}"), fit: BoxFit.fill)),
                                             ),
                                           );
                                         },
@@ -314,7 +374,7 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                                                     ? Padding( padding: const EdgeInsets.only(bottom: 5),
                                                   child: Container(
 
-                                                    decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),image: DecorationImage(image: NetworkImage("${ postAdViewPageViewModel!.getBroadCastDetail!.similarAddList![index].adImageThumb}"), fit: BoxFit.fill)),
+                                                    decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),image: DecorationImage(image: NetworkImage("${ postAdViewPageViewModel!.getBroadCastDetail!.similarAddList![index].adImageThumb}"), fit: BoxFit.fill)),
                                                     height: 100,
                                                     width: double.infinity,
                                                   ),

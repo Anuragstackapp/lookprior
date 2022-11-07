@@ -142,7 +142,7 @@ class PostAddPageState extends State<PostAddPage> {
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 15),
+                                        const EdgeInsets.symmetric(horizontal: 15),
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(children: [
@@ -155,7 +155,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                     context);
                                           },
                                           child: Padding(
-                                            padding: EdgeInsets.only(),
+                                            padding: const EdgeInsets.only(),
                                             child: SizedBox(
                                               height: 109,
                                               width: 113,
@@ -163,7 +163,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                 SvgPicture.asset(
                                                     ImageResources.videoicon),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       left: 19, top: 62),
                                                   child: CommonText(
                                                     text: StringResources
@@ -246,7 +246,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                                 index);
                                                           });
                                                         },
-                                                        icon: Icon(Icons
+                                                        icon: const Icon(Icons
                                                             .remove_circle))
                                                   ]),
                                                 ],
@@ -265,7 +265,7 @@ class PostAddPageState extends State<PostAddPage> {
                           const SizedBox(
                             height: 25,
                           ),
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             child: Card(
                               shape: RoundedRectangleBorder(
@@ -309,7 +309,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                 SvgPicture.asset(
                                                     ImageResources.imageicon),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       left: 19, top: 62),
                                                   child: CommonText(
                                                     text: StringResources
@@ -323,12 +323,12 @@ class PostAddPageState extends State<PostAddPage> {
                                               ]),
                                             ),
                                           ),
-                                          photoPath.length > 0
+                                          photoPath.isNotEmpty
                                               ? Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           right: 10),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: 110,
                                                     width: 200,
                                                     child: ListView.builder(
@@ -338,7 +338,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                           photoPath.length,
                                                       itemBuilder:
                                                           (context, index) {
-                                                        return Container(
+                                                        return SizedBox(
                                                           height: 100,
                                                           width: 100,
                                                           child: Row(
@@ -378,7 +378,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                                               .removeAt(index);
                                                                         });
                                                                       },
-                                                                      icon: Icon(Icons.remove_circle),
+                                                                      icon: const Icon(Icons.remove_circle),
                                                                       color: Colors.red),
                                                                 )
                                                               ]),
@@ -389,7 +389,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                     ),
                                                   ),
                                                 )
-                                              : SizedBox(
+                                              : const SizedBox(
                                                   height: 100, width: 100),
                                         ],
                                       ),
@@ -516,7 +516,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                       child: OutlinedButton(
                                                         onPressed: () {
                                                           Navigator.pop(context);
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context){
                                                             // ignore: prefer_const_constructors
                                                             return PostYourAdDescription(videopath,photoPath);
                                                           },));

@@ -118,8 +118,6 @@ class PostYourAdViewModel{
 
             });
             showToastMessage('${responseMaps['Message']}', ColorsResources.registerScreen);
-
-
           }
 
         }

@@ -46,7 +46,7 @@ class PostAdViewPageViewModel{
     if (getBroadCastDetail!.success == true) {
 
       for(int i =0; i<getBroadCastDetail!.adVideo!.length;i++){
-        videoAndImageLink.add({"video" : "${getBroadCastDetail!.adVideo![i].videoThumb}"});
+        videoAndImageLink.add({"video" : "${getBroadCastDetail!.adVideo![i].videoThumb}","videoLink" : "${getBroadCastDetail!.adVideo![i].video}"});
         print("Video Link ===> ${getBroadCastDetail!.adVideo![i].videoThumb}");
 
       }
@@ -57,7 +57,7 @@ class PostAdViewPageViewModel{
 
       }
 
-      print("List Image and Video ===> ${videoAndImageLink.length}");
+      print("List Image and Video ===> $videoAndImageLink");
       postAdViewPageState.setState(() {
         adDataStatus = false;
       });
@@ -66,10 +66,10 @@ class PostAdViewPageViewModel{
     return null;
   }
   
-  deleteAds(BuildContext context){
+  deleteAds(BuildContext context) async {
 
     var id = postAdViewPageState.widget.adDetailid;
-    dynamic deleteResponce  = GetRestService.getRestMethods(endPoint: '/api/v1/detail/DeleteAdByAdmin?addDetailId=$id');
+    dynamic deleteResponce  = await GetRestService.getRestMethods(endPoint: '/api/v1/detail/DeleteAdByAdmin?addDetailId=$id');
 
     print("Deleate ok");
     if(deleteResponce.isNotEmpty){
@@ -77,10 +77,11 @@ class PostAdViewPageViewModel{
       if(deleteResopnseMap.containsKey('Success')){
         print("Deleate ok");
 
+        SnackBar(content: Text("${deleteResopnseMap['Message']}"));
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
           return BottambarPage(i: 3);
         },));
-        SnackBar(content: Text("${deleteResopnseMap['Message']}"));
+
 
         postAdViewPageState.setState(() {
 

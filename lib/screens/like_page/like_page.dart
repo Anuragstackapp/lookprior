@@ -18,6 +18,7 @@ class _LikePageState extends State<LikePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsResources.registerScreen,
       appBar:AppBar(
         backgroundColor: ColorsResources.registerScreen,
         elevation: 0,
@@ -35,6 +36,16 @@ class _LikePageState extends State<LikePage> {
           padding: const EdgeInsets.only(right: 40),
           child: Text("Like Page"),
         ),),
+
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(topRight: Radius.circular(42),topLeft: Radius.circular(42)),
+        ),
+        width: double.infinity,
+        height: double.infinity,
+
 
       ),
 
