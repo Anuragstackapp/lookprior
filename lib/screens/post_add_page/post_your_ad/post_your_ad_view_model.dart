@@ -98,6 +98,7 @@ class PostYourAdViewModel{
         if (response.statusCode == 200) {
           // print(await response.stream.bytesToString());
           data = await response.stream.bytesToString();
+          print("responseData Ads === > $data");
           Map<String, dynamic> responseMaps = jsonDecode(data);
           print("responseMaps === > ${responseMaps.containsKey('Success')}");
           if(responseMaps.containsKey('Success') && responseMaps['Success']){

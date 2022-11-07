@@ -76,7 +76,16 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                             controller: postAdViewPageViewModel!.pageController,
                             itemCount: postAdViewPageViewModel!.videoAndImageLink.length,
                             itemBuilder: (context, index) {
-                              return   Image.network(postAdViewPageViewModel!.videoAndImageLink[index],width: double.infinity,height: double.infinity,fit: BoxFit.fill);
+                              return   postAdViewPageViewModel!.videoAndImageLink[index].containsKey("video") ? Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["video"]}"),fit: BoxFit.fill,),
+                                ),
+                                child: Center(
+                                  child: IconButton(onPressed: () {
+
+                                  }, icon: const Icon(Icons.play_circle_fill_rounded,color: Colors.white,size: 30,)),
+                                ),
+                              ) : Container(decoration: BoxDecoration(image: DecorationImage(image: NetworkImage("${postAdViewPageViewModel!.videoAndImageLink[index]["image"]}"))),);
                           },),
                         ),
 
@@ -240,14 +249,14 @@ class PostAdViewPageState extends State<PostAdViewPage> {
                                                       Radius.circular(
                                                           5)),
                                                   image: DecorationImage(
-                                                      image: NetworkImage( postAdViewPageViewModel!.videoAndImageLink[index]), fit: BoxFit.fill)),
+                                                      image: NetworkImage(postAdViewPageViewModel!.videoAndImageLink[index].containsKey("image") ?  "${postAdViewPageViewModel!.videoAndImageLink[index]["image"]}" : "${postAdViewPageViewModel!.videoAndImageLink[index]["video"]}"), fit: BoxFit.fill)),
                                             ),
                                           );
                                         },
                                       ),
                                     ),
                                   ),
-                                ) : Center(child: CircularProgressIndicator(color: ColorsResources.registerScreen,)),
+                                ) : Center(child: CircularProgressIndicator(color: ColorsResources.registerScreen)),
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Padding(

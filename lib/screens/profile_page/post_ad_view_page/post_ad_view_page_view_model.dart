@@ -15,7 +15,8 @@ class PostAdViewPageViewModel{
   dynamic tokan;
   GetBroadCastDetail? getBroadCastDetail;
   bool adDataStatus = false;
-  List<String> videoAndImageLink = [];
+  List<Map<String,dynamic>> videoAndImageLink = [];
+
   PageController pageController = PageController();
   int cnt = 0;
 
@@ -45,13 +46,13 @@ class PostAdViewPageViewModel{
     if (getBroadCastDetail!.success == true) {
 
       for(int i =0; i<getBroadCastDetail!.adVideo!.length;i++){
-        videoAndImageLink.add("${getBroadCastDetail!.adVideo![i].videoThumb}");
+        videoAndImageLink.add({"video" : "${getBroadCastDetail!.adVideo![i].videoThumb}"});
         print("Video Link ===> ${getBroadCastDetail!.adVideo![i].videoThumb}");
 
       }
 
       for(int i =0; i<getBroadCastDetail!.adImage!.length;i++){
-        videoAndImageLink.add("${getBroadCastDetail!.adImage![i].image}");
+        videoAndImageLink.add({"image":"${getBroadCastDetail!.adImage![i].image}"});
         print("Image Link ===> ${getBroadCastDetail!.adImage![i].image}");
 
       }
@@ -71,19 +72,19 @@ class PostAdViewPageViewModel{
     dynamic deleteResponce  = GetRestService.getRestMethods(endPoint: '/api/v1/detail/DeleteAdByAdmin?addDetailId=$id');
 
     print("Deleate ok");
-    if(deleteResponce != null && deleteResponce.isNotEmpty){
+    if(deleteResponce.isNotEmpty){
       Map<String , dynamic> deleteResopnseMap = jsonDecode(deleteResponce);
       if(deleteResopnseMap.containsKey('Success')){
         print("Deleate ok");
-        postAdViewPageState.setState(() {
 
-        });
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
           return BottambarPage(i: 3);
         },));
         SnackBar(content: Text("${deleteResopnseMap['Message']}"));
 
-        
+        postAdViewPageState.setState(() {
+
+        });
       }
     }
   
