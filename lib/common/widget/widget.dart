@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lookprior/common/constant/color_const.dart';
 import 'package:lookprior/common/constant/image_const.dart';
 import 'package:lookprior/common/widget/custom_button.dart';
-import 'package:lookprior/common/widget/elevated_button.dart';
-import 'package:lookprior/common/widget/text_form_field.dart';
-import 'package:lookprior/screens/first_page/first_page.dart';
 import 'package:lookprior/screens/login_screen/googlesign.dart';
-import 'package:lookprior/screens/login_screen/login_screen.dart';
+
 
 
 void statusBarColor() {

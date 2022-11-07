@@ -58,6 +58,7 @@ dependencies:
   fluttertoast: ^8.1.1
   google_places_flutter: ^2.0.5
   syncfusion_flutter_datagrid: ^20.3.52
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:

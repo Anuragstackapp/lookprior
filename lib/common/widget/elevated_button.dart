@@ -30,20 +30,20 @@ class CommonElevatedButton extends StatelessWidget {
       height: 44,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          text!,
-          style: GoogleFonts.poppins(
-                fontSize: textSize,
-                color: textColor,
-                fontWeight: FontWeight.w500,
-          ),
-        ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(buttonColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius),
             ),
+          ),
+        ),
+        child: Text(
+          text!,
+          style: GoogleFonts.poppins(
+                fontSize: textSize,
+                color: textColor,
+                fontWeight: FontWeight.w500,
           ),
         ),
       ),

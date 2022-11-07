@@ -11,7 +11,7 @@ class SherdPref{
 
   static Future<String?>? getAccessTokan() async {
     final prefs = await SharedPreferences.getInstance();
-    final String? action = await prefs.getString('access_token');
+    final String? action = prefs.getString('access_token');
 
     print("Get Acsses Tokan ---> $action");
 

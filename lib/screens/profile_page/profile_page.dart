@@ -67,7 +67,7 @@ class ProfilePageState extends State<ProfilePage> {
   Future<bool> goback() {
     Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) {
-        return  BottambarPage();
+        return BottambarPage();
       },
     ));
 
@@ -165,7 +165,7 @@ class ProfilePageState extends State<ProfilePage> {
                                                             context,
                                                             MaterialPageRoute(
                                                           builder: (context) {
-                                                            return  BottambarPage();
+                                                            return BottambarPage();
                                                           },
                                                         ));
                                                       },
@@ -271,8 +271,7 @@ class ProfilePageState extends State<ProfilePage> {
                                                         FontWeight.w500)),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 3),
+                                            padding: const EdgeInsets.only(top: 3),
                                             child: Text("Owner",
                                                 style: GoogleFonts.poppins(
                                                   color: Colors.grey,
@@ -281,50 +280,33 @@ class ProfilePageState extends State<ProfilePage> {
                                           SizedBox(
                                             width: double.infinity,
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(8.0),
                                               child: Card(
                                                 elevation: 4,
-                                                child:
-                                                    profilePageViewModel!
-                                                            .adsStatus
-                                                        ? Column(
+                                                child: profilePageViewModel!.adsStatus ? Column(
                                                             children: [
                                                               ListView.builder(
-                                                                shrinkWrap:
-                                                                    true,
-                                                                physics:
-                                                                    const ClampingScrollPhysics(),
+                                                                shrinkWrap: true,
+                                                                physics: const ClampingScrollPhysics(),
                                                                 itemCount: profilePageViewModel!.getAds!.filteredAddList!.length,
-                                                                itemBuilder:
-                                                                    (context, index) {
+                                                                itemBuilder: (context, index) {
                                                                   return Padding(
-                                                                    padding: const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            10,
-                                                                        right:
-                                                                            10,
-                                                                        top:
-                                                                            10),
-                                                                    child:
-                                                                        SizedBox(
-                                                                      height:
-                                                                          80,
-                                                                      child:
-                                                                          InkWell(
-                                                                            onTap: () {
-                                                                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                                                return const PostAdViewPage();
-                                                                              },));
+                                                                    padding: const EdgeInsets.only(left: 10,right: 10, top: 10),
+                                                                    child: SizedBox(
+                                                                      height: 80,
+                                                                      child: InkWell(
+                                                                        onTap: () {
+                                                                          Navigator.push(context, MaterialPageRoute(
+                                                                            builder: (context) {
+                                                                              return  PostAdViewPage(broadCastId:profilePageViewModel!.getAds!.filteredAddList![index].broadCastId,adDetailid: profilePageViewModel!.getAds!.filteredAddList![index].adDetailId,);
                                                                             },
-                                                                            child: Card(
-                                                                        child:
-                                                                              Row(
+                                                                          ));
+                                                                        },
+                                                                        child: Card(
+                                                                          child: Row(
                                                                             children: [
                                                                               profilePageViewModel!.getAds!.filteredAddList![index].adImageThumb!.isNotEmpty
-                                                                                  ? Padding(
-                                                                                      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+                                                                                  ? Padding( padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
                                                                                       child: Container(
                                                                                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), image: DecorationImage(image: NetworkImage("${profilePageViewModel!.getAds!.filteredAddList![index].adImageThumb}"), fit: BoxFit.fill)),
                                                                                         height: 70,
@@ -342,27 +324,16 @@ class ProfilePageState extends State<ProfilePage> {
                                                                               Padding(
                                                                                 padding: const EdgeInsets.only(left: 10),
                                                                                 child: SizedBox(
-
                                                                                   child: Column(
-                                                                                    children:  [
+                                                                                    children: [
                                                                                       Padding(
                                                                                         padding: const EdgeInsets.only(top: 10),
-                                                                                        child: Text("${profilePageViewModel!.getAds!.filteredAddList![index].title}",overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(
-                                                                                          color: Colors.black,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          fontSize: 11
-                                                                                        )),
+                                                                                        child: Text("${profilePageViewModel!.getAds!.filteredAddList![index].title}", overflow: TextOverflow.ellipsis, style: GoogleFonts.poppins(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 11)),
                                                                                       ),
-
                                                                                       Padding(
                                                                                         padding: const EdgeInsets.only(top: 4),
-                                                                                        child: Text("\$${profilePageViewModel!.getAds!.filteredAddList![index].amount}",overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(
-                                                                                            color: Colors.black,
-                                                                                            fontSize: 11
-                                                                                        )),
+                                                                                        child: Text("\$${profilePageViewModel!.getAds!.filteredAddList![index].amount}", overflow: TextOverflow.ellipsis, style: GoogleFonts.poppins(color: Colors.black, fontSize: 11)),
                                                                                       ),
-
-
                                                                                     ],
                                                                                   ),
                                                                                 ),
@@ -384,9 +355,9 @@ class ProfilePageState extends State<ProfilePage> {
                                                                                 ),
                                                                               ),
                                                                             ],
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                          ),
                                                                     ),
                                                                   );
                                                                 },
@@ -394,31 +365,20 @@ class ProfilePageState extends State<ProfilePage> {
                                                               profilePageViewModel!
                                                                       .animatinloder
                                                                   ? Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          top:
-                                                                              5),
-                                                                      child: CircularProgressIndicator(
-                                                                          color:
-                                                                              ColorsResources.registerScreen),
+                                                                      padding: const EdgeInsets.only(top: 5),
+                                                                      child: CircularProgressIndicator(color: ColorsResources.registerScreen),
                                                                     )
                                                                   : const SizedBox(),
                                                               Padding(
                                                                 padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        bottom:
-                                                                            15),
+                                                                    const EdgeInsets.only(bottom: 15),
                                                                 child:
                                                                     TextButton(
-                                                                        onPressed:
-                                                                            () {
+                                                                        onPressed: () {
                                                                           setState(
                                                                               () {
-                                                                            profilePageViewModel!.animatinloder =
-                                                                                true;
-                                                                            profilePageViewModel!.i =
-                                                                                profilePageViewModel!.i + 10;
+                                                                            profilePageViewModel!.animatinloder = true;
+                                                                            profilePageViewModel!.i = profilePageViewModel!.i + 10;
                                                                           });
                                                                           profilePageViewModel!
                                                                               .getUserAds()
@@ -442,20 +402,30 @@ class ProfilePageState extends State<ProfilePage> {
                                                         : Column(
                                                             children: [
                                                               Padding(
-                                                                padding: const EdgeInsets.only(
-                                                                        left: 45,
-                                                                        right: 45, top: 30),
-                                                                child: ElevatedButton(
-                                                                        style: ButtonStyle(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            45,
+                                                                        right:
+                                                                            45,
+                                                                        top:
+                                                                            30),
+                                                                child:
+                                                                    ElevatedButton(
+                                                                        style:
+                                                                            ButtonStyle(
                                                                           backgroundColor:
                                                                               MaterialStateProperty.all(Colors.deepPurple),
-                                                                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                                                                          shape:
+                                                                              MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                                                                         ),
                                                                         onPressed:
                                                                             () {
                                                                           setState(
                                                                               () {
-                                                                            statusPgae = true;
+                                                                            statusPgae =
+                                                                                true;
                                                                           });
                                                                         },
                                                                         child:
@@ -496,9 +466,8 @@ class ProfilePageState extends State<ProfilePage> {
                                                                           Navigator.pushReplacement(
                                                                               context,
                                                                               MaterialPageRoute(
-                                                                            builder:
-                                                                                (context) {
-                                                                              return  BottambarPage();
+                                                                            builder: (context) {
+                                                                              return BottambarPage();
                                                                             },
                                                                           ));
                                                                         },
@@ -521,15 +490,7 @@ class ProfilePageState extends State<ProfilePage> {
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            45,
-                                                                        right:
-                                                                            45,
-                                                                        top: 10,
-                                                                        bottom:
-                                                                            25),
+                                                                    const EdgeInsets.only(left: 45, right: 45, top: 10, bottom: 25),
                                                                 child:
                                                                     ElevatedButton(
                                                                         style:

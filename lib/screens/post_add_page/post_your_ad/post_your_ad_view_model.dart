@@ -81,13 +81,14 @@ class PostYourAdViewModel{
 
         for (var i = 0; i < postYourAdDescriptionState.widget.photoPath.length; i++) {
           request.files.add(await http.MultipartFile.fromPath(
-              'adImageList[0]', postYourAdDescriptionState.widget.photoPath[i]!.path));
+              'adImageList[$i]', postYourAdDescriptionState.widget.photoPath[i]!.path));
           print("imgPath ===>${postYourAdDescriptionState.widget.photoPath[i]!.path}");
         }
 
+        print("Viedo leanth ===> ${postYourAdDescriptionState.widget.videopath.length}");
         for (var i = 0; i < postYourAdDescriptionState.widget.videopath.length; i++) {
           request.files.add(await http.MultipartFile.fromPath(
-              'adVideoList[0].adVideo',
+              'adVideoList[$i].adVideo',
               postYourAdDescriptionState.widget.videopath[i]!.path));
           print("video ====>${postYourAdDescriptionState.widget.videopath[i]!.path}");
         }

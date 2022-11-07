@@ -6,6 +6,8 @@ import 'package:country_pickers/country_pickers.dart';
 
 
 class DemoPage extends StatefulWidget {
+  const DemoPage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -146,7 +148,7 @@ class _HomePageState extends State<DemoPage> {
       //if you want your dropdown button's selected item UI to be different
       //than itemBuilder's(dropdown menu item UI), then provide this selectedItemBuilder.
       onValuePicked: (Country country) {
-        print("${country.name}");
+        print(country.name);
       },
       itemBuilder: (Country country) {
         return Row(

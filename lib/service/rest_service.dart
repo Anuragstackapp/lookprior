@@ -30,7 +30,7 @@ class RestService{
 
 class GetRestService{
   static const String baseUrl = 'https://lookprstage.com/admin/';
-  static dynamic getRestMethods({@ required String? endPoint, @ required var headers}) async {
+  static dynamic getRestMethods({@ required String? endPoint, var headers}) async {
 
     try {
       String url = "${baseUrl}${endPoint}";
